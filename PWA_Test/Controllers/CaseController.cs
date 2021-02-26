@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -21,7 +22,7 @@ namespace PWA_Test.Controllers
 
         string requestXml = @"<sctlink-request>
                                 <login>
-                                    <email>sdlcomps2020 @rightmove.com</email>
+                                    <email>sdlcomps2020@rightmove.com</email>
                                     <password>EWv=2!!WY!Dn6H</password>
                                     <officeid>215927</officeid>
                                 </login>
@@ -37,43 +38,58 @@ namespace PWA_Test.Controllers
         [HttpPost]
         public async Task<ActionResult> Submit()
         {
-            //requestXml = requestXml.Replace("\r\n", string.Empty);
+            ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+
+            requestXml = requestXml.Replace("\r\n", string.Empty);
 
             string formattedXML = FormatXml(requestXml);
 
-            var content = new StringContent(formattedXML, Encoding.UTF8, "application/xml");
+            var content = new StringContent(requestXml, Encoding.UTF8, "application/xml");
 
-            var httpClient = new HttpClient();
+            //var httpClient = new HttpClient();
 
-            HttpResponseMessage Res = await httpClient.PostAsync(baseUrl, content);
-
-            //var httpRequestMessage = new HttpRequestMessage(HttpMethod.Post, new Uri(baseUrl))
-            //{
-            //    Version = HttpVersion.Version10,
-            //    Content = content
-            //};
-
-            //HttpResponseMessage Res = await httpClient.SendAsync(httpRequestMessage);
-
-            //Checking the response is successful or not which is sent using HttpClient
-            if (Res.IsSuccessStatusCode)
+            using (var httpClient = new HttpClient())
             {
-                //Storing the response details recieved from web api
-                var DevelopmentResponse = Res.Content.ReadAsStringAsync().Result;
+                httpClient.DefaultRequestHeaders.Clear();
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
+                httpClient.BaseAddress = new Uri("https://www.rightmove.co.uk/dsi/sctReport/v5");
+                httpClient.Timeout = TimeSpan.FromSeconds(100);
 
-                //dynamic json = JsonConvert.DeserializeObject(DevelopmentResponse);
+                HttpResponseMessage Res = await httpClient.PostAsync(baseUrl, content);
 
+                //Checking the response is successful or not which is sent using HttpClient
+                if (Res.IsSuccessStatusCode)
+                {
+                    //Storing the response details recieved from web api
+                    var DevelopmentResponse = Res.Content.ReadAsStringAsync().Result;
+
+                    //dynamic json = JsonConvert.DeserializeObject(DevelopmentResponse);
+
+                }
+
+                //var model = new Case
+                //{
+                //    returnedXML = result.Content.ToString()
+                //};
+
+                //return View(model);
+
+                return View();
             }
-
-            //var model = new Case
-            //{
-            //    returnedXML = result.Content.ToString()
-            //};
-
-            //return View(model);
-
-            return View();
         }
+
+        //string XMLInput()
+        //{
+        //var client = new RestClient("https://www.rightmove.co.uk/dsi/sctReport/v5");
+        //client.Timeout = -1;
+        //var request = new RestRequest(Method.POST);
+        //request.AddHeader("Content-Type", "application/xml");
+
+        //request.AddParameter("application/xml", "<sctlink-request>\r\n    <login>\r\n        <email>sdlcomps2020@rightmove.com</email>\r\n        <password>EWv=2!!WY!Dn6H</password>\r\n        <officeid>215927</officeid>\r\n    </login>\r\n    <address>\r\n        <address-line-1>15 Berrans Avenue</address-line-1>\r\n        <address-line-2>Kinson</address-line-2>\r\n        <address-line-3>Bournemouth</address-line-3>\r\n        <postcode>BH11 9BT</postcode>\r\n    </address>\r\n    <quest-xit2-reference>1234</quest-xit2-reference>\r\n</sctlink-request>", 
+        //        ParameterType.RequestBody);
+        //    IRestResponse response = client.Execute(request);
+        //Console.WriteLine(response.Content)
+        //}
 
         string FormatXml(string xml)
         {
