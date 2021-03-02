@@ -1,0 +1,100 @@
+﻿@model IEnumerable<PWA_Test.Models.Comparable>
+@{
+    ViewBag.Title = "Comparables List";
+}
+<div>
+    <h4>Comparables List</h4>
+    <hr />
+    @foreach (var item in Model)
+    {
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.addressLine)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => item.addressLine)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.postcode)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => item.postcode)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.image)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => item.image)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.compScore)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => item.compScore)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.bedrooms)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => item.bedrooms)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.propType)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => item.propType)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.propStyle)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => item.propStyle)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.floorArea)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => item.floorArea)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.askingPrice)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => item.askingPrice)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.rmStatus)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => item.rmStatus)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.distance)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => item.distance)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.yearBuilt)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => item.yearBuilt)
+            </dd>
+        </dl>
+        <hr />
+    }
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -9,23 +9,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.link)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.rmReference)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.rmReference)
-        </dd>
-
-        <dt>
-           Returned XML
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.returnedXML)
+            <a href=@Html.DisplayFor(model => model.link)>@Html.DisplayFor(model => model.link)</a>
         </dd>
     </dl>
 </div>

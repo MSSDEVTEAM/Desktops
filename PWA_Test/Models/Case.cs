@@ -13,11 +13,13 @@ namespace PWA_Test.Models
 
         public int Id { get; set; }
 
+        [DisplayName("Office Id")]
+        public string officeId { get; set; }
+
         [DisplayName("Link to Comparables")]
         public string link { get; set; }
 
         [DisplayName("Right Move Reference Number")]
         public string rmReference { get; set; }
-        public string returnedXML { get; set; }
     }
 }

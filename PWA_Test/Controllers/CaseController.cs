@@ -1,9 +1,5 @@
-﻿using System;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PWA_Test.Models;
+using RestSharp;
 using System.Web.Mvc;
 using System.Xml.Linq;
 
@@ -14,95 +10,35 @@ namespace PWA_Test.Controllers
         // GET: Case
         public ActionResult Index()
         {
-            return View();
-        }
+            var client = new RestClient("https://www.rightmove.co.uk/dsi/sctReport/v5");
+            client.Timeout = -1;
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("Content-Type", "application/xml");
 
-        //Hosted web API REST Service base url  
-        string baseUrl = "https://www.rightmove.co.uk/dsi/sctReport/v5";
+            // This will be coming from selection from a list 
+            request.AddParameter("application/xml", "<sctlink-request>\r\n    <login>\r\n        <email>sdlcomps2020@rightmove.com</email>\r\n        <password>EWv=2!!WY!Dn6H</password>\r\n        <officeid>215927</officeid>\r\n    </login>\r\n    <address>\r\n        <address-line-1>15 Berrans Avenue</address-line-1>\r\n        <address-line-2>Kinson</address-line-2>\r\n        <address-line-3>Bournemouth</address-line-3>\r\n        <postcode>BH11 9BT</postcode>\r\n    </address>\r\n    <quest-xit2-reference>1234</quest-xit2-reference>\r\n</sctlink-request>",
+                    ParameterType.RequestBody);
+            IRestResponse response = client.Execute(request);
 
-        string requestXml = @"<sctlink-request>
-                                <login>
-                                    <email>sdlcomps2020@rightmove.com</email>
-                                    <password>EWv=2!!WY!Dn6H</password>
-                                    <officeid>215927</officeid>
-                                </login>
-                                <address>
-                                    <address-line-1>15 Berrans Avenue</address-line-1>
-                                    <address-line-2>Kinson</address-line-2>
-                                    <address-line-3>Bournemouth</address-line-3>
-                                    <postcode>BH11 9BT</postcode>
-                                </address>
-                                <quest-xit2-reference>1234</quest-xit2-reference>
-                            </sctlink-request>";
-
-        [HttpPost]
-        public async Task<ActionResult> Submit()
-        {
-            ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
-
-            requestXml = requestXml.Replace("\r\n", string.Empty);
-
-            string formattedXML = FormatXml(requestXml);
-
-            var content = new StringContent(requestXml, Encoding.UTF8, "application/xml");
-
-            //var httpClient = new HttpClient();
-
-            using (var httpClient = new HttpClient())
+            //Checking the response is successful or not which is sent using HttpClient
+            if (response.IsSuccessful)
             {
-                httpClient.DefaultRequestHeaders.Clear();
-                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
-                httpClient.BaseAddress = new Uri("https://www.rightmove.co.uk/dsi/sctReport/v5");
-                httpClient.Timeout = TimeSpan.FromSeconds(100);
+                //Storing the response details recieved from web api
+                var caseResponse = response.Content;
 
-                HttpResponseMessage Res = await httpClient.PostAsync(baseUrl, content);
+                var xml = XElement.Parse(caseResponse);
 
-                //Checking the response is successful or not which is sent using HttpClient
-                if (Res.IsSuccessStatusCode)
+                var model = new Case
                 {
-                    //Storing the response details recieved from web api
-                    var DevelopmentResponse = Res.Content.ReadAsStringAsync().Result;
+                    officeId = xml.Element("officeid").Value,
+                    rmReference = xml.Element("rm-reference").Value,
+                    link = xml.Element("link").Value,
+                };
 
-                    //dynamic json = JsonConvert.DeserializeObject(DevelopmentResponse);
-
-                }
-
-                //var model = new Case
-                //{
-                //    returnedXML = result.Content.ToString()
-                //};
-
-                //return View(model);
-
-                return View();
+                return View(model);
             }
-        }
 
-        //string XMLInput()
-        //{
-        //var client = new RestClient("https://www.rightmove.co.uk/dsi/sctReport/v5");
-        //client.Timeout = -1;
-        //var request = new RestRequest(Method.POST);
-        //request.AddHeader("Content-Type", "application/xml");
-
-        //request.AddParameter("application/xml", "<sctlink-request>\r\n    <login>\r\n        <email>sdlcomps2020@rightmove.com</email>\r\n        <password>EWv=2!!WY!Dn6H</password>\r\n        <officeid>215927</officeid>\r\n    </login>\r\n    <address>\r\n        <address-line-1>15 Berrans Avenue</address-line-1>\r\n        <address-line-2>Kinson</address-line-2>\r\n        <address-line-3>Bournemouth</address-line-3>\r\n        <postcode>BH11 9BT</postcode>\r\n    </address>\r\n    <quest-xit2-reference>1234</quest-xit2-reference>\r\n</sctlink-request>", 
-        //        ParameterType.RequestBody);
-        //    IRestResponse response = client.Execute(request);
-        //Console.WriteLine(response.Content)
-        //}
-
-        string FormatXml(string xml)
-        {
-            try
-            {
-                XDocument doc = XDocument.Parse(xml);
-                return doc.ToString();
-            }
-            catch (Exception)
-            {
-                // Handle and throw if fatal exception here; don't just ignore them
-                return xml;
-            }
+            return View();
         }
     }
 }
