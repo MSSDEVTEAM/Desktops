@@ -50,6 +50,7 @@ namespace PWA_Test.Controllers
                             {
                                 addressLine = (string)x.Element("address").Element("address-line"),
                                 postcode = (string)x.Element("address").Element("postcode"),
+                                image = (string)x.Element("image"),
                                 compScore = (string)x.Element("comp-score"),
                                 bedrooms = (string)x.Element("bedrooms"),
                                 propType = (string)x.Element("prop-type"),
