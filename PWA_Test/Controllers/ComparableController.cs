@@ -102,6 +102,11 @@ namespace PWA_Test.Controllers
                     return View("NotFound");
             }
 
+            return View("NotFound");
+        }
+
+        public ActionResult NotFound()
+        {
             return View();
         }
     }
