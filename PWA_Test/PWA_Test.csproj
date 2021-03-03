@@ -270,6 +270,8 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\icons\house-icon-32x33.png" />
+    <Content Include="Content\images\icons\house-icon.png" />
     <Content Include="Content\images\icons\icon-128x128.png" />
     <Content Include="Content\images\icons\icon-144x144.png" />
     <Content Include="Content\images\icons\icon-152x152.png" />

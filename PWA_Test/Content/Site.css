@@ -22,3 +22,11 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/* Example of a link CSS */
+a.link-icon {
+    display: block;
+    height: 32px;
+    width: 33px;
+    background: url('images/icons/house-icon-32x33.png');
+}

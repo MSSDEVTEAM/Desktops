@@ -9,11 +9,6 @@ namespace PWA_Test.Controllers
 {
     public class ComparableController : Controller
     {
-        IEnumerable<XElement> comparables;
-        Comparable comparable;
-        XElement xml;
-        List<XElement> entries;
-
         // GET: /Comparable
         public ActionResult Index()
         {
@@ -40,11 +35,11 @@ namespace PWA_Test.Controllers
                 // Storing the response details recieved from web api
                 var pass2Response = response.Content;
 
-                xml = XElement.Parse(pass2Response);
+                XElement xml = XElement.Parse(pass2Response);
 
                 if (xml != null)
                 {
-                    comparables = xml
+                    IEnumerable<XElement> comparables = xml
                         .Descendants("comparables")
                         .Descendants("sales-comparables");
 
@@ -72,11 +67,11 @@ namespace PWA_Test.Controllers
         {
             if (TempData["comparables"] != null)
             {
-                comparables = (IEnumerable<XElement>)TempData["comparables"];
+                IEnumerable<XElement> comparables = (IEnumerable<XElement>)TempData["comparables"];
                 var parentNode = "comparable-property";
                 var childNode = "rank";
                 var childNodeValue = rank;
-                entries = comparables
+                var entries = comparables
                     .Descendants(parentNode)
                     .Where(parent => parent.Descendants(childNode)
                         .Any(child => child.Value == childNodeValue)
@@ -84,7 +79,7 @@ namespace PWA_Test.Controllers
 
                 if (entries != null)
                 {
-                    comparable = entries
+                    var comparable = entries
                         .Select(x => new Comparable
                         {
                             addressLine = (string)x.Element("address").Element("address-line"),

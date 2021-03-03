@@ -8,16 +8,14 @@
     @foreach (var item in Model)
     {
         <dl class="dl-horizontal">
+            <dt>Rank @item.rank property</dt>
             <dd>
-                @Html.ActionLink(Html.DisplayNameFor(model => model.rank) + item.rank, "Details", new { rank=item.rank })
+                @Html.ActionLink(" ", "Details", new { rank=item.rank }, new { @class="link-icon" } )
             </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.postcode)
-            </dt>
-            <dd>
+            @*<dt>
                 @Html.DisplayFor(model => item.postcode)
-            </dd>
+            </dt>*@
         </dl>
     }
 </div>
