@@ -1,5 +1,6 @@
 ﻿using PWA_Test.Models;
 using RestSharp;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using System.Xml.Linq;
@@ -8,7 +9,12 @@ namespace PWA_Test.Controllers
 {
     public class ComparableController : Controller
     {
-        // GET: Case
+        IEnumerable<XElement> comparables;
+        Comparable comparable;
+        XElement xml;
+        List<XElement> entries;
+
+        // GET: /Comparable
         public ActionResult Index()
         {
             var client = new RestClient("https://rightmove.co.uk/dsi/report-details");
@@ -34,11 +40,11 @@ namespace PWA_Test.Controllers
                 // Storing the response details recieved from web api
                 var pass2Response = response.Content;
 
-                var xml = XElement.Parse(pass2Response);
+                xml = XElement.Parse(pass2Response);
 
                 if (xml != null)
                 {
-                    var comparables = xml
+                    comparables = xml
                         .Descendants("comparables")
                         .Descendants("sales-comparables");
 
@@ -48,22 +54,57 @@ namespace PWA_Test.Controllers
                             .Descendants("comparable-property")
                             .Select(x => new Comparable
                             {
-                                addressLine = (string)x.Element("address").Element("address-line"),
                                 postcode = (string)x.Element("address").Element("postcode"),
-                                image = (string)x.Element("image"),
-                                compScore = (string)x.Element("comp-score"),
-                                bedrooms = (string)x.Element("bedrooms"),
-                                propType = (string)x.Element("prop-type"),
-                                propStyle = (string)x.Element("prop-style"),
-                                floorArea = (string)x.Element("floor-area"),
-                                askingPrice = (string)x.Element("asking-price"),
-                                rmStatus = (string)x.Element("rm-status"),
-                                distance = (string)x.Element("distance"),
-                                yearBuilt = (string)x.Element("year-built")
+                                rank = (string)x.Element("rank")
                             });
+
+                        TempData["comparables"] = comparables;
+
                         return View(comparable);
                     }
                 }
+            }
+
+            return View();
+        }
+
+        public ActionResult Details(string rank)
+        {
+            if (TempData["comparables"] != null)
+            {
+                comparables = (IEnumerable<XElement>)TempData["comparables"];
+                var parentNode = "comparable-property";
+                var childNode = "rank";
+                var childNodeValue = rank;
+                entries = comparables
+                    .Descendants(parentNode)
+                    .Where(parent => parent.Descendants(childNode)
+                        .Any(child => child.Value == childNodeValue)
+                    ).ToList();
+
+                if (entries != null)
+                {
+                    comparable = entries
+                        .Select(x => new Comparable
+                        {
+                            addressLine = (string)x.Element("address").Element("address-line"),
+                            postcode = (string)x.Element("address").Element("postcode"),
+                            image = (string)x.Element("image"),
+                            compScore = (string)x.Element("comp-score"),
+                            bedrooms = (string)x.Element("bedrooms"),
+                            propType = (string)x.Element("prop-type"),
+                            propStyle = (string)x.Element("prop-style"),
+                            floorArea = (string)x.Element("floor-area"),
+                            askingPrice = (string)x.Element("asking-price"),
+                            rmStatus = (string)x.Element("rm-status"),
+                            distance = (string)x.Element("distance"),
+                            yearBuilt = (string)x.Element("year-built")
+                        }).FirstOrDefault();
+
+                    return View(comparable);
+                }
+                else
+                    return View("NotFound");
             }
 
             return View();

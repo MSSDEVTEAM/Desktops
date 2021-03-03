@@ -4,6 +4,9 @@ namespace PWA_Test.Models
 {
     public class Comparable
     {
+        [DisplayName("Rank")]
+        public string rank { get; set; }
+
         [DisplayName("Address Line")]
         public string addressLine { get; set; }
 
