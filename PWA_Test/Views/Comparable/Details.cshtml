@@ -28,7 +28,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.image)
+            <img src=@Html.DisplayFor(model => model.image) alt="Property image" />
         </dd>
 
         <dt>
@@ -104,9 +104,7 @@
         </dd>
 
     </dl>
-
-    <p>PDF document sits HERE</p>
 </div>
 <p>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to the Comparables List", "Index")
 </p>
