@@ -27,7 +27,9 @@ namespace PWA_Test.Controllers
                 "</login>\r\n    " +
                 "<quest-xit2-reference>SB-3805566</quest-xit2-reference>\r\n" +
                 "</sctcomps-request>", 
-                ParameterType.RequestBody); IRestResponse response = client.Execute(request);
+                ParameterType.RequestBody);
+
+            IRestResponse response = client.Execute(request);
 
             // Checking the response is successful or not which is sent using HttpClient
             if (response.IsSuccessful)
