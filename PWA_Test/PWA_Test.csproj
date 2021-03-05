@@ -267,7 +267,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ComparableController.cs" />
-    <Compile Include="Controllers\CaseController.cs" />
     <Compile Include="Controllers\DesktopCasesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OfflineController.cs" />
@@ -275,7 +274,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Address.cs" />
-    <Compile Include="Models\Case.cs" />
     <Compile Include="Models\Comparable.cs" />
     <Compile Include="Models\DesktopCases.cs" />
     <Compile Include="Models\DesktopCaseStatus.cs" />
@@ -407,7 +405,6 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="Views\Case\Index.cshtml" />
     <Content Include="Scripts\jquery-3.5.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.5.1.min.map" />
     <Content Include="Scripts\umd\popper.min.js.map" />
