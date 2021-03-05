@@ -35,7 +35,7 @@ namespace PWA_Test.Models
 
         [DisplayName("Status")]
         public Nullable<int> StatusId { get; set; }
-        public Nullable<int> SurveyorId { get; set; }
+        public Nullable<int> SurveyorFK { get; set; }
 
        
         //public DesktopCaseStatus DesktopCasesStatusName { get; set; }
