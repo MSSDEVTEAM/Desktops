@@ -1,7 +1,9 @@
 ﻿using PWA_Test.Models;
 using RestSharp;
-using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
@@ -43,11 +45,28 @@ namespace PWA_Test.Controllers
 
                 if (xml != null)
                 {
-                    var PDF = xml.Descendants("pdf");
+                    @ViewData["subjectAddress"] = (string)xml.Descendants("subject-property").ElementAt(0).Element("address").Element("address-line");
+                    @ViewData["subjectPostcode"] = (string)xml.Descendants("subject-property").ElementAt(0).Element("address").Element("postcode");
 
-                    byte[] test = Encoding.UTF8.GetBytes(PDF.ToString());
+                    //var PDF = xml.Descendants("pdf");
 
-                    IEnumerable <XElement> comparables = xml
+                    //byte[] test = Encoding.UTF8.GetBytes(PDF.ToString());
+                    //string cs = ConfigurationManager.ConnectionStrings["PWA_TestContext"].ConnectionString;
+                    //using (SqlConnection con = new SqlConnection(cs))
+                    //{
+                    //    using (SqlCommand cmd = new SqlCommand("usp_Filestream_Insert", con))
+                    //    {
+                    //        cmd.CommandType = CommandType.StoredProcedure;
+
+                    //        cmd.Parameters.Add("@Document", SqlDbType.Binary).Value = test;
+                    //        cmd.Parameters.Add("@filename", SqlDbType.VarChar).Value = "Test File 1";
+
+                    //        con.Open();
+                    //        cmd.ExecuteNonQuery();
+                    //    }
+                    //}
+
+                    IEnumerable<XElement> comparables = xml
                         .Descendants("comparables")
                         .Descendants("sales-comparables");
 

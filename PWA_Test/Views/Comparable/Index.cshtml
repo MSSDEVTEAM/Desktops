@@ -5,8 +5,18 @@
 <div>
     <h4>Comparables List</h4>
     <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.subjectAddress)
+        </dt>
 
-    <p>Subject property sits HERE</p>
+        <dd>
+            @ViewData["subjectAddress"]
+        </dd>
+        <dd>
+            @ViewData["subjectPostcode"]
+        </dd>
+    </dl>
 
     @foreach (var item in Model)
     {

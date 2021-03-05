@@ -4,6 +4,11 @@ namespace PWA_Test.Models
 {
     public class Comparable
     {
+        [DisplayName("Subject Property Address")]
+        public string subjectAddress { get; set; }
+
+        public string subjectPostcode { get; set; }
+
         [DisplayName("Rank")]
         public string rank { get; set; }
 
