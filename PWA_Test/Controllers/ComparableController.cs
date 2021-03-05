@@ -1,7 +1,9 @@
 ﻿using PWA_Test.Models;
 using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web.Mvc;
 using System.Xml.Linq;
 
@@ -41,7 +43,11 @@ namespace PWA_Test.Controllers
 
                 if (xml != null)
                 {
-                    IEnumerable<XElement> comparables = xml
+                    var PDF = xml.Descendants("pdf");
+
+                    byte[] test = Encoding.UTF8.GetBytes(PDF.ToString());
+
+                    IEnumerable <XElement> comparables = xml
                         .Descendants("comparables")
                         .Descendants("sales-comparables");
 
