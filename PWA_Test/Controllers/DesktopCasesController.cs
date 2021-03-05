@@ -8,7 +8,6 @@ using System.Web;
 using System.Web.Mvc;
 using PWA_Test.Models;
 
-
 namespace PWA_Test.Controllers
 {
     public class DesktopCasesController : Controller
@@ -47,7 +46,7 @@ namespace PWA_Test.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CaseRef,PlatformRef,Address,Postcode,EstimatedVal,LoanAmount,OriginalLTV,PropertyType,PropertyStyle,Beds,Tenure,AppointmentDate,StatusId,SurveyorId")] DesktopCases desktopCases)
+        public ActionResult Create([Bind(Include = "Id,CaseRef,PlatformRef,Address,Postcode,EstimatedVal,LoanAmount,OriginalLTV,PropertyType,PropertyStyle,Beds,Tenure,AppointmentDate,StatusId,SurveyorFK")] DesktopCases desktopCases)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +78,7 @@ namespace PWA_Test.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CaseRef,PlatformRef,Address,Postcode,EstimatedVal,LoanAmount,OriginalLTV,PropertyType,PropertyStyle,Beds,Tenure,AppointmentDate,StatusId,SurveyorId")] DesktopCases desktopCases)
+        public ActionResult Edit([Bind(Include = "Id,CaseRef,PlatformRef,Address,Postcode,EstimatedVal,LoanAmount,OriginalLTV,PropertyType,PropertyStyle,Beds,Tenure,AppointmentDate,StatusId,SurveyorFK")] DesktopCases desktopCases)
         {
             if (ModelState.IsValid)
             {
