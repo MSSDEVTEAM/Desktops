@@ -1,15 +1,16 @@
 ﻿@model PWA_Test.Models.DesktopCases
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "";
 }
 
-<h2>Details</h2>
+
 
 <div>
-    <h4>DesktopCases</h4>
+    <h4>DesktopCase</h4>
     <hr />
     <dl class="dl-horizontal">
+    
         <dt>
             @Html.DisplayNameFor(model => model.CaseRef)
         </dt>
@@ -143,6 +144,6 @@
 </div>
 
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Valuation", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

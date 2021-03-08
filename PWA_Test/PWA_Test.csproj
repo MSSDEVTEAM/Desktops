@@ -299,6 +299,7 @@
     <Content Include="Content\images\icons\icon-384x384.png" />
     <Content Include="Content\images\icons\icon-512x512.png" />
     <Content Include="Content\images\icons\icon-72x72.png" />
+    <Content Include="Content\Styles.css" />
     <Content Include="Error.htm" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -448,6 +449,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_AddressPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
