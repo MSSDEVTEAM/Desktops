@@ -26,7 +26,7 @@ namespace PWA_Test.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             DesktopCases desktopCases = db.DesktopCases.Find(id);
-            ViewData["linkToComparables"] = GetLinkToComparables(desktopCases.Address, desktopCases.Postcode, desktopCases.Id);
+            desktopCases.ComparablesLink = GetLinkToComparables(desktopCases.Address, desktopCases.Postcode, desktopCases.Id);
 
             if (desktopCases == null)
             {
@@ -66,6 +66,11 @@ namespace PWA_Test.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             DesktopCases desktopCases = db.DesktopCases.Find(id);
+
+            // Only assign the new comparables link if the link is stored already
+            if (string.IsNullOrEmpty(desktopCases.ComparablesLink))
+                desktopCases.ComparablesLink = GetLinkToComparables(desktopCases.Address, desktopCases.Postcode, desktopCases.Id);
+
             if (desktopCases == null)
             {
                 return HttpNotFound();
@@ -78,7 +83,7 @@ namespace PWA_Test.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CaseRef,PlatformRef,Address,Postcode,EstimatedVal,LoanAmount,OriginalLTV,PropertyType,PropertyStyle,Beds,Tenure,AppointmentDate,StatusId,SurveyorFK")] DesktopCases desktopCases)
+        public ActionResult Edit([Bind(Include = "Id,CaseRef,PlatformRef,Address,Postcode,EstimatedVal,LoanAmount,OriginalLTV,PropertyType,PropertyStyle,Beds,Tenure,AppointmentDate,StatusId,SurveyorFK,ComparablesLink")] DesktopCases desktopCases)
         {
             if (ModelState.IsValid)
             {

@@ -33,8 +33,8 @@ namespace PWA_Test.Models
         public Nullable<int> StatusId { get; set; }
         public Nullable<int> SurveyorFK { get; set; }
 
-        //[DisplayName("Link to Comparables")]
-        //public string link { get; set; }
+        [DisplayName("Link to Comparables")]
+        public string ComparablesLink { get; set; }
 
         //public DesktopCaseStatus DesktopCasesStatusName { get; set; }
     }
