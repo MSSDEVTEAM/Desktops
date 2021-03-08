@@ -35,6 +35,15 @@ namespace PWA_Test.Models
 
         [DisplayName("Status")]
         public Nullable<int> StatusId { get; set; }
+
+        public Nullable<decimal> CalculatedVal { get; set; }
+
+        public Nullable<decimal> SurveyorValuation { get; set; }
+
+        public Nullable<decimal> NewLTV { get; set; }
+
+        public string ComparablesLink { get; set; }
+                
         public Nullable<int> SurveyorFK { get; set; }
 
        
