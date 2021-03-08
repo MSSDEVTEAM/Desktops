@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 
 namespace PWA_Test.Models
@@ -46,7 +42,9 @@ namespace PWA_Test.Models
                 
         public Nullable<int> SurveyorFK { get; set; }
 
-       
+        [DisplayName("Link to Comparables")]
+        public string ComparablesLink { get; set; }
+
         //public DesktopCaseStatus DesktopCasesStatusName { get; set; }
     }
 }

@@ -5,6 +5,19 @@
 <div>
     <h4>Comparables List</h4>
     <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.subjectAddress)
+        </dt>
+
+        <dd>
+            @ViewData["subjectAddress"]
+        </dd>
+        <dd>
+            @ViewData["subjectPostcode"]
+        </dd>
+    </dl>
+
     @foreach (var item in Model)
     {
         <dl class="dl-horizontal">
@@ -14,7 +27,5 @@
             </dd>
         </dl>
     }
-
-    <p>PDF document sits HERE</p>
 
 </div>

@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using PWA_Test.Models;
+using RestSharp;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using PWA_Test.Models;
+using System.Xml.Linq;
 
 namespace PWA_Test.Controllers
 {
@@ -28,6 +26,8 @@ namespace PWA_Test.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             DesktopCases desktopCases = db.DesktopCases.Find(id);
+            desktopCases.ComparablesLink = GetLinkToComparables(desktopCases.Address, desktopCases.Postcode, desktopCases.Id);
+
             if (desktopCases == null)
             {
                 return HttpNotFound();
@@ -66,6 +66,11 @@ namespace PWA_Test.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             DesktopCases desktopCases = db.DesktopCases.Find(id);
+
+            // Only assign the new comparables link if the link is stored already
+            if (string.IsNullOrEmpty(desktopCases.ComparablesLink))
+                desktopCases.ComparablesLink = GetLinkToComparables(desktopCases.Address, desktopCases.Postcode, desktopCases.Id);
+
             if (desktopCases == null)
             {
                 return HttpNotFound();
@@ -78,7 +83,7 @@ namespace PWA_Test.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CaseRef,PlatformRef,Address,Postcode,EstimatedVal,LoanAmount,OriginalLTV,PropertyType,PropertyStyle,Beds,Tenure,AppointmentDate,StatusId,SurveyorFK")] DesktopCases desktopCases)
+        public ActionResult Edit([Bind(Include = "Id,CaseRef,PlatformRef,Address,Postcode,EstimatedVal,LoanAmount,OriginalLTV,PropertyType,PropertyStyle,Beds,Tenure,AppointmentDate,StatusId,SurveyorFK,ComparablesLink")] DesktopCases desktopCases)
         {
             if (ModelState.IsValid)
             {
@@ -122,6 +127,47 @@ namespace PWA_Test.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        protected string GetLinkToComparables(string address, string postCode, int id)
+        {
+            var linkToComparables = "";
+
+            var client = new RestClient("https://www.rightmove.co.uk/dsi/sctReport/v5");
+            client.Timeout = -1;
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("Content-Type", "application/xml");
+
+            // This will be coming from selection from a list 
+            request.AddParameter("application/xml",
+                                  "<sctlink-request>\r\n    " +
+                                    "<login>\r\n        " +
+                                    "  <email>sdlcomps2020@rightmove.com</email>\r\n        " +
+                                    "  <password>EWv=2!!WY!Dn6H</password>\r\n        " +
+                                    "  <officeid>215927</officeid>\r\n    " +
+                                    "</login>\r\n    " +
+                                    "<address>\r\n        " +
+                                    "  <address-line-1>" + address + "</address-line-1>\r\n        " +
+                                    "  <postcode>" + postCode + "</postcode>\r\n    " +
+                                    "</address>\r\n    " +
+                                    "<quest-xit2-reference>" + id + "</quest-xit2-reference>\r\n" +
+                                  "</sctlink-request>",
+                    ParameterType.RequestBody);
+
+            IRestResponse response = client.Execute(request);
+
+            //Checking the response is successful or not which is sent using HttpClient
+            if (response.IsSuccessful)
+            {
+                //Storing the response details recieved from web api
+                var caseResponse = response.Content;
+
+                var xml = XElement.Parse(caseResponse);
+
+                linkToComparables = xml.Element("link").Value;
+            }
+
+            return linkToComparables;
         }
     }
 }

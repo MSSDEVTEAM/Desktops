@@ -122,8 +122,23 @@
             @Html.DisplayFor(model => model.SurveyorFK)
         </dd>*@
 
+        <dt>
+            <strong>@Html.DisplayNameFor(model => model.ComparablesLink)</strong>
+        </dt>
+
+        <dd>
+            <a href=@Html.DisplayFor(model => model.ComparablesLink) alt="Comparable properties">@Html.DisplayFor(model => model.ComparablesLink)</a>
+        </dd>
     </dl>
 </div>
+
+    @*<p>
+        Link to Right Move Comparable Properties
+    </p>
+    <p>
+        <a href=@ViewData["linkToComparables"] alt="Comparable properties">@ViewData["linkToComparables"]</a>
+    </p>*@
+
 <p>
     @Html.ActionLink("Valuation", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")

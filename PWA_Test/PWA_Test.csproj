@@ -54,6 +54,9 @@
     <Reference Include="Elmah.Bootstrapper, Version=1.0.21423.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\elmah.bootstrapper.1.0.1\lib\net45\Elmah.Bootstrapper.dll</HintPath>
     </Reference>
+    <Reference Include="Elmah.Mvc, Version=2.1.2.1389, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Elmah.Mvc.2.1.2\lib\net40\Elmah.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -267,7 +270,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ComparableController.cs" />
-    <Compile Include="Controllers\CaseController.cs" />
     <Compile Include="Controllers\DesktopCasesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OfflineController.cs" />
@@ -275,7 +277,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Address.cs" />
-    <Compile Include="Models\Case.cs" />
     <Compile Include="Models\Comparable.cs" />
     <Compile Include="Models\DesktopCases.cs" />
     <Compile Include="Models\DesktopCaseStatus.cs" />
@@ -408,7 +409,6 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="Views\Case\Index.cshtml" />
     <Content Include="Scripts\jquery-3.5.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.5.1.min.map" />
     <Content Include="Scripts\umd\popper.min.js.map" />
