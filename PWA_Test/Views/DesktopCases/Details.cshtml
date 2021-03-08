@@ -127,17 +127,20 @@
         </dt>
 
         <dd>
-            <a href=@Html.DisplayFor(model => model.ComparablesLink) alt="Comparable properties">@Html.DisplayFor(model => model.ComparablesLink)</a>
+            <a href=@Html.DisplayFor(model => model.ComparablesLink) alt="Comparable properties" class="btn btn-primary">Go to Right Move</a>
+        </dd>
+
+        <dt>
+            <strong>Retrieve Comparables</strong>
+        </dt>
+
+        <dd>
+            <form action="@Url.Action("Index", "Comparable", new { id = Model.Id })" method="POST">
+                <input class="btn btn-primary" type="submit" value="Retrieve comparables" />
+            </form>
         </dd>
     </dl>
 </div>
-
-    @*<p>
-        Link to Right Move Comparable Properties
-    </p>
-    <p>
-        <a href=@ViewData["linkToComparables"] alt="Comparable properties">@ViewData["linkToComparables"]</a>
-    </p>*@
 
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |

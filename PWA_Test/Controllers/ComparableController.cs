@@ -13,8 +13,8 @@ namespace PWA_Test.Controllers
 {
     public class ComparableController : Controller
     {
-        // GET: /Comparable
-        public ActionResult Index()
+        // GET: /Comparable/5
+        public ActionResult Index(int? id)
         {
             var client = new RestClient("https://rightmove.co.uk/dsi/report-details");
             client.Timeout = -1;
@@ -29,7 +29,7 @@ namespace PWA_Test.Controllers
                 "<password>EWv=2!!WY!Dn6H</password>\r\n        " +
                 "<officeid>215927</officeid>\r\n    " +
                 "</login>\r\n    " +
-                "<quest-xit2-reference>SB-3805566</quest-xit2-reference>\r\n" +
+                "<quest-xit2-reference>" + id + "</quest-xit2-reference>\r\n" +
                 "</sctcomps-request>", 
                 ParameterType.RequestBody);
 
@@ -47,24 +47,6 @@ namespace PWA_Test.Controllers
                 {
                     @ViewData["subjectAddress"] = (string)xml.Descendants("subject-property").ElementAt(0).Element("address").Element("address-line");
                     @ViewData["subjectPostcode"] = (string)xml.Descendants("subject-property").ElementAt(0).Element("address").Element("postcode");
-
-                    //var PDF = xml.Descendants("pdf");
-
-                    //byte[] test = Encoding.UTF8.GetBytes(PDF.ToString());
-                    //string cs = ConfigurationManager.ConnectionStrings["PWA_TestContext"].ConnectionString;
-                    //using (SqlConnection con = new SqlConnection(cs))
-                    //{
-                    //    using (SqlCommand cmd = new SqlCommand("usp_Filestream_Insert", con))
-                    //    {
-                    //        cmd.CommandType = CommandType.StoredProcedure;
-
-                    //        cmd.Parameters.Add("@Document", SqlDbType.Binary).Value = test;
-                    //        cmd.Parameters.Add("@filename", SqlDbType.VarChar).Value = "Test File 1";
-
-                    //        con.Open();
-                    //        cmd.ExecuteNonQuery();
-                    //    }
-                    //}
 
                     IEnumerable<XElement> comparables = xml
                         .Descendants("comparables")
@@ -85,6 +67,11 @@ namespace PWA_Test.Controllers
                         return View(comparable);
                     }
                 }
+            }
+            else
+            {
+                ViewData["Id"] = id;
+                return View("CompsIncomplete");
             }
 
             return View();
@@ -133,6 +120,11 @@ namespace PWA_Test.Controllers
         }
 
         public ActionResult NotFound()
+        {
+            return View();
+        }
+
+        public ActionResult CompsIncomplete()
         {
             return View();
         }
