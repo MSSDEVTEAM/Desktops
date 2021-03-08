@@ -38,8 +38,7 @@ namespace PWA_Test.Models
 
         public Nullable<decimal> NewLTV { get; set; }
 
-        public string ComparablesLink { get; set; }
-                
+                       
         public Nullable<int> SurveyorFK { get; set; }
 
         [DisplayName("Link to Comparables")]
