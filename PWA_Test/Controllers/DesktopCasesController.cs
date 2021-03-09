@@ -1,4 +1,5 @@
-﻿using PWA_Test.Models;
+﻿using PWA_Test.Config;
+using PWA_Test.Models;
 using RestSharp;
 using System.Data.Entity;
 using System.Linq;
@@ -141,11 +142,7 @@ namespace PWA_Test.Controllers
             // This will be coming from selection from a list 
             request.AddParameter("application/xml",
                                   "<sctlink-request>\r\n    " +
-                                    "<login>\r\n        " +
-                                    "  <email>sdlcomps2020@rightmove.com</email>\r\n        " +
-                                    "  <password>EWv=2!!WY!Dn6H</password>\r\n        " +
-                                    "  <officeid>215927</officeid>\r\n    " +
-                                    "</login>\r\n    " +
+                                    ConfigSettings.LoginToRM +
                                     "<address>\r\n        " +
                                     "  <address-line-1>" + address + "</address-line-1>\r\n        " +
                                     "  <postcode>" + postCode + "</postcode>\r\n    " +

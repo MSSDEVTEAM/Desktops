@@ -1,11 +1,8 @@
-﻿using PWA_Test.Models;
+﻿using PWA_Test.Config;
+using PWA_Test.Models;
 using RestSharp;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
 using System.Web.Mvc;
 using System.Xml.Linq;
 
@@ -22,13 +19,9 @@ namespace PWA_Test.Controllers
             request.AddHeader("Content-Type", "application/xml");
 
             // This will be coming from selection from a list 
-            request.AddParameter("application/xml", 
-                "<sctcomps-request>\r\n    " +
-                "<login>\r\n        " +
-                "<email>sdlcomps2020@rightmove.com</email>\r\n        " +
-                "<password>EWv=2!!WY!Dn6H</password>\r\n        " +
-                "<officeid>215927</officeid>\r\n    " +
-                "</login>\r\n    " +
+            request.AddParameter("application/xml",
+                "<sctcomps-request>\r\n    " + 
+                ConfigSettings.LoginToRM +
                 "<quest-xit2-reference>" + id + "</quest-xit2-reference>\r\n" +
                 "</sctcomps-request>", 
                 ParameterType.RequestBody);
@@ -117,16 +110,6 @@ namespace PWA_Test.Controllers
             }
 
             return View("NotFound");
-        }
-
-        public ActionResult NotFound()
-        {
-            return View();
-        }
-
-        public ActionResult CompsIncomplete()
-        {
-            return View();
         }
     }
 }
