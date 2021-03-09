@@ -68,6 +68,10 @@ namespace PWA_Test.Controllers
             }
             DesktopCases desktopCases = db.DesktopCases.Find(id);
 
+            var displayAddress = desktopCases.Address + " " + desktopCases.Postcode;
+
+            ViewBag.Address = displayAddress;
+
             // Only assign the new comparables link if the link is stored already
             if (string.IsNullOrEmpty(desktopCases.ComparablesLink))
                 desktopCases.ComparablesLink = GetLinkToComparables(desktopCases.Address, desktopCases.Postcode, desktopCases.Id);
