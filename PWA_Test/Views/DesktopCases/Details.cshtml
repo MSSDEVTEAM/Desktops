@@ -6,144 +6,77 @@
 
 
 
-<div>
-    <h4>DesktopCase</h4>
-    <hr />
-    <dl class="dl-horizontal">
-    
-        <dt>
-            @Html.DisplayNameFor(model => model.CaseRef)
-        </dt>
+<div class="left-tables">
+    <div class="table">
+        <div class="bar1">Desktop Case<span class="minustable glyphicon glyphicon-minus" style="color: white; font-size: 14px; float: right; margin-right: 10px; margin-top: 3px;"></span></div>
+        <div class="Details slide">
 
-        <dd>
-            @Html.DisplayFor(model => model.CaseRef)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PlatformRef)
-        </dt>
+            <table class="desktop-table">
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.CaseRef)</td>
+                    <td>@Html.DisplayFor(model => model.CaseRef)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.PlatformRef)</td>
+                    <td>@Html.DisplayFor(model => model.PlatformRef)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Address)</td>
+                    <td>@Html.DisplayFor(model => model.Address)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Postcode)</td>
+                    <td>@Html.DisplayFor(model => model.Postcode)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.EstimatedVal)</td>
+                    <td>@Html.DisplayFor(model => model.EstimatedVal)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.LoanAmount)</td>
+                    <td>@Html.DisplayFor(model => model.LoanAmount)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.OriginalLTV)</td>
+                    <td>@Html.DisplayFor(model => model.OriginalLTV)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.PropertyType)</td>
+                    <td>@Html.DisplayFor(model => model.PropertyType)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.PropertyStyle)</td>
+                    <td>@Html.DisplayFor(model => model.PropertyStyle)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Beds)</td>
+                    <td>@Html.DisplayFor(model => model.Beds)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Tenure)</td>
+                    <td>@Html.DisplayFor(model => model.Tenure)</td>
+                </tr>
+            </table>
+        </div>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.PlatformRef)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Postcode)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Postcode)
-        </dd>
+            <a href=@Html.DisplayFor(model => model.ComparablesLink) alt="Comparable properties" class="casesbtn" target="_blank">Go to Right Move</a>
+    <br />
+    <br />
 
-        <dt>
-            @Html.DisplayNameFor(model => model.EstimatedVal)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EstimatedVal)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LoanAmount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LoanAmount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.OriginalLTV)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.OriginalLTV)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PropertyType)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PropertyType)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PropertyStyle)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PropertyStyle)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Beds)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Beds)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Tenure)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Tenure)
-        </dd>
-
-        @*<dt>
-            @Html.DisplayNameFor(model => model.AppointmentDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AppointmentDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.StatusId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.StatusId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SurveyorFK)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SurveyorFK)
-        </dd>*@
-
-        <dt>
-            <strong>@Html.DisplayNameFor(model => model.ComparablesLink)</strong>
-        </dt>
-
-        <dd>
-            <a href=@Html.DisplayFor(model => model.ComparablesLink) alt="Comparable properties" class="btn btn-primary" target="_blank">Go to Right Move</a>
-        </dd>
-
-        <dt>
-            <strong>Retrieve Comparables</strong>
-        </dt>
-
-        <dd>
             <form action="@Url.Action("Index", "Comparable", new { id = Model.Id })" method="POST" target="_blank">
-                <input class="btn btn-primary" type="submit" value="Retrieve" />
+                <input class="casesbtn" type="submit" value="Retrieve Comparables" />
             </form>
-        </dd>
-    </dl>
+    <p>
+        @*  @Html.ActionLink("Valuation", "Edit", new { id = Model.Id }) |*@
+        @Html.ActionLink("Back to List", "Index")
+    </p>
 </div>
+    
 
-<p>
-    @Html.ActionLink("Valuation", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+

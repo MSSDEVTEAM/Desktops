@@ -38,8 +38,10 @@ namespace PWA_Test.Controllers
 
                 if (xml != null)
                 {
-                    @ViewData["subjectAddress"] = (string)xml.Descendants("subject-property").ElementAt(0).Element("address").Element("address-line");
-                    @ViewData["subjectPostcode"] = (string)xml.Descendants("subject-property").ElementAt(0).Element("address").Element("postcode");
+                    var subjectAddress = (string)xml.Descendants("subject-property").ElementAt(0).Element("address").Element("address-line");
+                    var subjectPostcode = (string)xml.Descendants("subject-property").ElementAt(0).Element("address").Element("postcode");
+                    ViewBag.Address = subjectAddress + subjectPostcode;
+                    TempData["address"] = ViewBag.Address;
 
                     IEnumerable<XElement> comparables = xml
                         .Descendants("comparables")
@@ -74,6 +76,8 @@ namespace PWA_Test.Controllers
         {
             if (TempData["comparables"] != null)
             {
+                ViewBag.Address = TempData["address"];
+
                 IEnumerable<XElement> comparables = (IEnumerable<XElement>)TempData["comparables"];
                 var parentNode = "comparable-property";
                 var childNode = "rank";

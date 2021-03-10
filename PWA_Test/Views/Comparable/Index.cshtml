@@ -6,7 +6,9 @@
     <h4>Comparables List</h4>
     <hr />
 
-    @*@Html.Partial("_AddressPartial")*@
+    <div class="address-font text-center">
+        @Html.Partial("_AddressPartial", (string)@ViewBag.Address)
+    </div>
 
     <dl class="dl-horizontal">
         <dt>

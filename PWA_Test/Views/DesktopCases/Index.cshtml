@@ -4,104 +4,92 @@
     ViewBag.Title = "Index";
 }
 
+<div class="left-tables">
+    <div class="table">
+        <div class="bar1">Desktop Cases<span class="minustable glyphicon glyphicon-minus" style="color: white; font-size: 14px; float: right; margin-right: 10px; margin-top: 3px;"></span></div>
+        <div class="All slide">
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CaseRef)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PlatformRef)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Address)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Postcode)
-        </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.EstimatedVal)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LoanAmount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OriginalLTV)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PropertyType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PropertyStyle)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Beds)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Tenure)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AppointmentDate)
-        </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.StatusId)
-        </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.SurveyorFK)
-        </th>*@
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.CaseRef)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PlatformRef)
-        </td>*@
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Postcode)
-        </td>
-        <td>
-            @*@Html.DisplayFor(modelItem => item.EstimatedVal)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LoanAmount)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OriginalLTV)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PropertyType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PropertyStyle)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Beds)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tenure)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AppointmentDate)
-        </td>*@
-        <td>
-            @Html.DisplayFor(modelItem => item.StatusId)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.SurveyorFK)
-        </td>*@
-        <td>
-            @*@Html.ActionLink("Select", "Edit", new { id=item.Id }) |*@
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) @*|
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
-        </td>
-    </tr>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CaseRef)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PlatformRef)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Address)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Postcode)
+                    </th>
+                    @*<th>
+                @Html.DisplayNameFor(model => model.EstimatedVal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LoanAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OriginalLTV)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PropertyType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PropertyStyle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Beds)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tenure)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AppointmentDate)
+            </th>*@
+                    <th>
+                        @Html.DisplayNameFor(model => model.StatusId)
+                    </th>
+                    @*<th>
+                @Html.DisplayNameFor(model => model.SurveyorFK)
+            </th>*@
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CaseRef)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PlatformRef)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Postcode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StatusId)
+                    </td>
+
+
+                    @*<td>
+                @Html.DisplayFor(modelItem => item.SurveyorFK)
+            </td>*@
+                    <td>
+                        @*@Html.ActionLink("Select", "Edit", new { id=item.Id }) |*@
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) @*|
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
+                    </td>
+                </tr>
 }
 
-</table>
+            </table>
+        </div>
+    </div>
+</div>
+
