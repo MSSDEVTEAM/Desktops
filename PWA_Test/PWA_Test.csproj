@@ -160,6 +160,7 @@
     <Reference Include="Microsoft.Net.Http.Headers, Version=2.2.8.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Net.Http.Headers.2.2.8\lib\netstandard2.0\Microsoft.Net.Http.Headers.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -281,7 +282,18 @@
     <Compile Include="Models\Comparable.cs" />
     <Compile Include="Models\DesktopCases.cs" />
     <Compile Include="Models\DesktopCaseStatus.cs" />
+    <Compile Include="Models\Metadata.cs" />
+    <Compile Include="Models\PartialClasses.cs" />
     <Compile Include="Models\PWA_TestContext.cs" />
+    <Compile Include="Models\Security.cs" />
+    <Compile Include="Models\tbl_EmailTemplate.cs" />
+    <Compile Include="Models\tbl_User.cs" />
+    <Compile Include="Models\tbl_UserType.cs" />
+    <Compile Include="Models\UspLogin_Result.cs" />
+    <Compile Include="Models\UspPasswordresetRequestEmail_Result.cs" />
+    <Compile Include="Models\UspPasswordUidCheck_Result.cs" />
+    <Compile Include="Models\UspPasswordUpdate_Result.cs" />
+    <Compile Include="Models\usp_net_Login_Get_Result.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -431,6 +443,10 @@
     <Content Include="Views\DesktopCases\Edit.cshtml" />
     <Content Include="Views\DesktopCases\Index.cshtml" />
     <Content Include="Views\Comparable\CompsIncomplete.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\RecoverPassword.cshtml" />
+    <Content Include="Views\Home\ResetPassword.cshtml" />
+    <Content Include="Views\Home\VerifyCode.cshtml" />
     <None Include="Views\Offline\Index.cshtml" />
     <Content Include="manifest.json" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
@@ -451,6 +467,7 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_AddressPartial.cshtml" />
+    <Content Include="Views\Shared\_LayoutForLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
