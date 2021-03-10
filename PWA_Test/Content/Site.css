@@ -1,12 +1,16 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    background-image: url(images/icons/BGTimeline.png);
+    background-repeat: no-repeat;
+    background-size: 100vw;
+    margin-top: 25px;
+    background-color: #00213d;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    color: white;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -30,3 +34,188 @@ a.link-icon {
     width: 33px;
     background: url('images/icons/house-icon-32x33.png');
 }
+
+.table a {
+    color: black
+}
+
+.center2 {
+    width: 25%;
+    height: 30%;
+    text-align: center;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.casesbtn {
+    -webkit-appearance: none;
+    background-color: #12759c;
+    line-height: 22px;
+    border-radius: 15px;
+    border: none;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    white-space: normal;
+    padding: 10px 30px;
+}
+
+.desktopbtn {
+    -webkit-appearance: none;
+    background-color: #12759c;
+    border-radius: 15px;
+    border: none;
+    margin-bottom: 10px;
+    font-size: 30px;
+    font-weight: 600;
+    color: white;
+    white-space: normal;
+    padding: 30px 50px;
+    outline: none;
+}
+
+    .desktopbtn:hover, .casesbtn:hover {
+        border: 1px solid #48bbde;
+        box-shadow: 0 0.4em 0.5em -0.4em #48bbde;
+        transform: translateY(-0.25em);
+        background-color: #193d61;
+        color: #48bbde;
+    }
+
+.left-tables {
+    position: absolute;
+    width: 50%;
+    height: 60%;
+    float: left;
+    display: table;
+    border-radius: 25px;
+    z-index: -2;
+    margin-top: 100px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.bar1 {
+    width: 100%;
+    background-color: #12759c;
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    border-top-right-radius: 15px;
+}
+
+.minustable {
+    cursor: pointer;
+}
+
+
+.table {
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+    .table th {
+        color: #48bbde;
+        background-color: #193d61;
+        font-size: 14px;
+        letter-spacing: 0em;
+        font-weight: 600;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        padding-left: 20px;
+        padding-right: 20px;
+        text-align: center;
+    }
+
+
+    .table td {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #dedede;
+        color: #193d61;
+        font-size: 12px;
+        letter-spacing: 0em;
+        font-weight: 600;
+        padding-left: 20px;
+        padding-right: 20px;
+        text-align: center;
+    }
+
+    .table tr {
+        background-color: #f1f1f1
+    }
+
+        .table tr:hover {
+            background-color: #dedede;
+            cursor: pointer
+        }
+
+.desktop-table {
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+    .desktop-table th {
+        color: #48bbde;
+        background-color: #193d61;
+        font-size: 16px;
+        letter-spacing: 0em;
+        font-weight: 600;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+        text-align: center;
+    }
+
+
+
+    .desktop-table td {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #dedede;
+        color: #193d61;
+        font-size: 13px;
+        letter-spacing: 0em;
+        font-weight: 600;
+        padding-left: 20px;
+        padding-right: 20px;
+        text-align: left;
+    }
+
+        .desktop-table td:nth-child(1) {
+            font-size: 13px;
+            background-color: #f1f1f1;
+            border-right: 3px solid #87a0ac;
+            width: 45%;
+            padding-left: 10px;
+            padding-right: 5px;
+        }
+
+        .desktop-table td:nth-child(2) {
+            background-color: #faf9fa;
+        }
+
+
+    .desktop-table tr {
+        background-color: #f1f1f1
+    }
+
+a {
+    color: white;
+}
+
+    a:hover {
+        color: #4ebade;
+        cursor: pointer;
+    }
