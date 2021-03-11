@@ -57,6 +57,7 @@ namespace PWA_Test.Controllers
                                 rank = (string)x.Element("rank")
                             });
 
+                        TempData["Id"] = id;
                         TempData["comparables"] = comparables;
 
                         return View(comparable);
@@ -76,6 +77,7 @@ namespace PWA_Test.Controllers
         {
             if (TempData["comparables"] != null)
             {
+                ViewData["Id"] = TempData["Id"];
                 ViewBag.Address = TempData["address"];
 
                 IEnumerable<XElement> comparables = (IEnumerable<XElement>)TempData["comparables"];

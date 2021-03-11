@@ -111,5 +111,5 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Close", "", "", new { onclick = "window.close()" })
+    @Html.ActionLink("Back to the Comparables List", "Index", new { id = Convert.ToInt32(ViewData["Id"]) })
 </p>
