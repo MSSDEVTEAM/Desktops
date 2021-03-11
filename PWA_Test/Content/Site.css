@@ -64,6 +64,8 @@ a.link-icon {
     font-weight: 600;
     color: white;
     white-space: normal;
+    float: left;
+    margin-right: 25px;
     padding: 10px 30px;
 }
 
@@ -93,13 +95,15 @@ a.link-icon {
     position: absolute;
     width: 50%;
     height: 60%;
-    float: left;
-    display: table;
-    border-radius: 25px;
-    z-index: -2;
-    margin-top: 100px;
-    padding-left: 25px;
-    padding-right: 25px;
+    text-align: center;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: table-cell;
+    vertical-align: middle;
 }
 
 .bar1 {
@@ -109,6 +113,8 @@ a.link-icon {
     padding-top: 10px;
     padding-bottom: 10px;
     text-align: center;
+    border-top: 3px solid #48bbde;
+    border-right: 4px solid #48bbde;
     font-size: 16px;
     font-weight: 600;
     border-top-right-radius: 15px;
@@ -150,6 +156,13 @@ a.link-icon {
         padding-right: 20px;
         text-align: center;
     }
+
+    .table td:nth-child(6) {
+        display: none;
+    }
+        .table th:nth-child(6) {
+            display: none;
+        }
 
     .table tr {
         background-color: #f1f1f1
@@ -218,4 +231,5 @@ a {
     a:hover {
         color: #4ebade;
         cursor: pointer;
+        text-decoration: none;
     }

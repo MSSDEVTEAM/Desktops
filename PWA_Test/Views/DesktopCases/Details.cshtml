@@ -65,17 +65,18 @@
 
 
 
-            <a href=@Html.DisplayFor(model => model.ComparablesLink) alt="Comparable properties" class="casesbtn" target="_blank">Go to Right Move</a>
-    <br />
-    <br />
+    <a style="margin-left: 75px" href=@Html.DisplayFor(model => model.ComparablesLink) alt="Comparable properties" class="casesbtn" target="_blank">Go to Right Move</a>
 
-            <form action="@Url.Action("Index", "Comparable", new { id = Model.Id })" method="POST" target="_blank">
-                <input class="casesbtn" type="submit" value="Retrieve Comparables" />
-            </form>
+
+    <form action="@Url.Action("Index", "Comparable", new { id = Model.Id })" method="POST" target="_blank">
+        <input class="casesbtn" type="submit" value="Retrieve Comparables" />
+    </form>
     <p>
+        <a class="casesbtn" href="/DesktopCases">Back to list</a>
         @*  @Html.ActionLink("Valuation", "Edit", new { id = Model.Id }) |*@
-        @Html.ActionLink("Back to List", "Index")
     </p>
+    <br />
+    <br />
 </div>
     
 
