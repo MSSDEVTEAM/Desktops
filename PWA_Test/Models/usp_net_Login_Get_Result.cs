@@ -10,11 +10,15 @@
 namespace PWA_Test.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class DesktopCaseStatus
+    public partial class usp_net_Login_Get_Result
     {
-        public int Id { get; set; }
-        public string StatusName { get; set; }
+        public string Error { get; set; }
+        public string UserId { get; set; }
+        public string FullName { get; set; }
+        public string Email { get; set; }
+        public string UserType { get; set; }
+        public int MFAPIN { get; set; }
+        public int ActiveStep { get; set; }
     }
 }

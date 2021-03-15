@@ -12,9 +12,10 @@ namespace PWA_Test.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class DesktopCaseStatus
+    public partial class FilestreamFiles
     {
-        public int Id { get; set; }
-        public string StatusName { get; set; }
+        public System.Guid Id { get; set; }
+        public byte[] File { get; set; }
+        public string FileName { get; set; }
     }
 }

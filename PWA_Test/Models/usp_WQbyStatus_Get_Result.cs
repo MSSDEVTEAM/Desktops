@@ -10,11 +10,12 @@
 namespace PWA_Test.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class DesktopCaseStatus
+    public partial class usp_WQbyStatus_Get_Result
     {
         public int Id { get; set; }
-        public string StatusName { get; set; }
+        public Nullable<int> CaseRef { get; set; }
+        public string Address { get; set; }
+        public string Postcode { get; set; }
     }
 }

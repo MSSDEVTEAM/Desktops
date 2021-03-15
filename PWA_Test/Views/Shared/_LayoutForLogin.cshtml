@@ -4,17 +4,21 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#2196f3" />
-    <title>@ViewBag.Title - Desktop</title>
-    <link href="~/Content/Site.css" rel="stylesheet" />
+    <title>@ViewBag.Title - Login</title>
+    
     <link href="~/Content/Styles.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link rel="manifest" href="/manifest.json">
 </head>
 <body>
-    @RenderSection("featured", required: false)
+    <div class="container"></div>
+   
     <div class="container body-content">
         @RenderBody()
+        <hr />
+      
     </div>
 
     @Scripts.Render("~/bundles/jquery")

@@ -12,9 +12,9 @@ namespace PWA_Test.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class DesktopCaseStatus
+    public partial class tbl_UserType
     {
-        public int Id { get; set; }
-        public string StatusName { get; set; }
+        public System.Guid ID { get; set; }
+        public string Type { get; set; }
     }
 }

@@ -1,0 +1,658 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MDVModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DesktopCases">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CaseRef" Type="int" />
+          <Property Name="PlatformRef" Type="varchar" MaxLength="15" />
+          <Property Name="Address" Type="varchar" MaxLength="200" />
+          <Property Name="Postcode" Type="varchar" MaxLength="15" />
+          <Property Name="EstimatedVal" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="LoanAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="OriginalLTV" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PropertyType" Type="varchar" MaxLength="5" />
+          <Property Name="PropertyStyle" Type="varchar" MaxLength="5" />
+          <Property Name="Beds" Type="int" />
+          <Property Name="Tenure" Type="varchar" MaxLength="5" />
+          <Property Name="AppointmentDate" Type="datetime" />
+          <Property Name="StatusId" Type="int" />
+          <Property Name="SurveyorFK" Type="uniqueidentifier" />
+          <Property Name="CalculatedVal" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="SurveyorValuation" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="NewLTV" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ComparablesLink" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="DesktopCaseStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="StatusName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MDV.dbo.ELMAH_Error' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ELMAH_Error">
+          <Key>
+            <PropertyRef Name="ErrorId" />
+            <PropertyRef Name="Application" />
+            <PropertyRef Name="Host" />
+            <PropertyRef Name="Type" />
+            <PropertyRef Name="Source" />
+            <PropertyRef Name="Message" />
+            <PropertyRef Name="User" />
+            <PropertyRef Name="StatusCode" />
+            <PropertyRef Name="TimeUtc" />
+            <PropertyRef Name="Sequence" />
+            <PropertyRef Name="AllXml" />
+          </Key>
+          <Property Name="ErrorId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Application" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="Host" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Source" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="Message" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="User" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StatusCode" Type="int" Nullable="false" />
+          <Property Name="TimeUtc" Type="datetime" Nullable="false" />
+          <Property Name="Sequence" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AllXml" Type="ntext" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MDV.dbo.FilestreamFiles' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="FilestreamFiles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="File" Type="varbinary(max)" />
+          <Property Name="FileName" Type="varchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="tbl_User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="255" />
+          <Property Name="LastName" Type="varchar" MaxLength="255" />
+          <Property Name="FullName" Type="varchar" MaxLength="255" />
+          <Property Name="Phone" Type="int" />
+          <Property Name="Email" Type="varchar" MaxLength="255" />
+          <Property Name="UserName" Type="varchar" MaxLength="255" />
+          <Property Name="UserPassword" Type="varchar" MaxLength="255" />
+          <Property Name="UserType" Type="uniqueidentifier" />
+          <Property Name="FailCount" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="LastLogin" Type="datetime" />
+          <Property Name="MFAPIN" Type="int" />
+          <Property Name="FirmID" Type="uniqueidentifier" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="IsExternal" Type="bit" />
+          <Property Name="ActiveStep" Type="int" />
+          <Property Name="ResetUID" Type="uniqueidentifier" />
+          <Property Name="UserStatus" Type="uniqueidentifier" />
+          <Property Name="BSMid" Type="uniqueidentifier" />
+          <Property Name="IsTestUser" Type="bit" />
+          <Property Name="StartDate" Type="date" />
+        </EntityType>
+        <EntityType Name="tbl_UserType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <Function Name="f_usp_PasswordResetRequest_email" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_usp_PasswordResetRequest_email">
+          <Parameter Name="userEmail" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ELMAH_GetErrorsXml" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Application" Type="nvarchar" Mode="In" />
+          <Parameter Name="PageIndex" Type="int" Mode="In" />
+          <Parameter Name="PageSize" Type="int" Mode="In" />
+          <Parameter Name="TotalCount" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="ELMAH_GetErrorXml" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Application" Type="nvarchar" Mode="In" />
+          <Parameter Name="ErrorId" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="ELMAH_LogError" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ErrorId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="Application" Type="nvarchar" Mode="In" />
+          <Parameter Name="Host" Type="nvarchar" Mode="In" />
+          <Parameter Name="Type" Type="nvarchar" Mode="In" />
+          <Parameter Name="Source" Type="nvarchar" Mode="In" />
+          <Parameter Name="Message" Type="nvarchar" Mode="In" />
+          <Parameter Name="User" Type="nvarchar" Mode="In" />
+          <Parameter Name="AllXml" Type="ntext" Mode="In" />
+          <Parameter Name="StatusCode" Type="int" Mode="In" />
+          <Parameter Name="TimeUtc" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="udf_PostCodeSpace" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="apipostcode" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="usp_Filestream_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Document" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="filename" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="usp_InsertUserByType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="firstname" Type="varchar" Mode="In" />
+          <Parameter Name="lastname" Type="varchar" Mode="In" />
+          <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="usertype" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="usp_mfa_pin_email" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="usp_net_Login_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="pwd" Type="varchar" Mode="In" />
+          <Parameter Name="usertype" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="usp_Password_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="uid" Type="varchar" Mode="In" />
+          <Parameter Name="newpass" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="usp_PasswordResetRequest_email" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userEmail" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="usp_Passworduid_Check" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="guid" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="usp_SecureLogin_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserName" Type="varchar" Mode="In" />
+          <Parameter Name="Pwd" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="usp_SendEmailByTemplateId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="varchar" Mode="In" />
+          <Parameter Name="templateid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_wq_fail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="questref" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="usp_wq_GetNext" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="uid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_wq_success" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="questref" Type="varchar" Mode="In" />
+          <Parameter Name="Address" Type="varchar" Mode="In" />
+          <Parameter Name="postcode" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="usp_WQbyStatus_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="status" Type="int" Mode="In" />
+          <Parameter Name="surv" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <EntityContainer Name="MDVModelStoreContainer">
+          <EntitySet Name="DesktopCases" EntityType="Self.DesktopCases" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DesktopCaseStatus" EntityType="Self.DesktopCaseStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_User" EntityType="Self.tbl_User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_UserType" EntityType="Self.tbl_UserType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ELMAH_Error" EntityType="Self.ELMAH_Error" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ELMAH_Error].[ErrorId] AS [ErrorId], 
+    [ELMAH_Error].[Application] AS [Application], 
+    [ELMAH_Error].[Host] AS [Host], 
+    [ELMAH_Error].[Type] AS [Type], 
+    [ELMAH_Error].[Source] AS [Source], 
+    [ELMAH_Error].[Message] AS [Message], 
+    [ELMAH_Error].[User] AS [User], 
+    [ELMAH_Error].[StatusCode] AS [StatusCode], 
+    [ELMAH_Error].[TimeUtc] AS [TimeUtc], 
+    [ELMAH_Error].[Sequence] AS [Sequence], 
+    [ELMAH_Error].[AllXml] AS [AllXml]
+    FROM [dbo].[ELMAH_Error] AS [ELMAH_Error]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="FilestreamFiles" EntityType="Self.FilestreamFiles" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [FilestreamFiles].[Id] AS [Id], 
+    [FilestreamFiles].[File] AS [File], 
+    [FilestreamFiles].[FileName] AS [FileName]
+    FROM [dbo].[FilestreamFiles] AS [FilestreamFiles]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MDVModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DesktopCases">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CaseRef" Type="Int32" />
+          <Property Name="PlatformRef" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Postcode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="EstimatedVal" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="LoanAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="OriginalLTV" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PropertyType" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="PropertyStyle" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Beds" Type="Int32" />
+          <Property Name="Tenure" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="AppointmentDate" Type="DateTime" Precision="3" />
+          <Property Name="StatusId" Type="Int32" />
+          <Property Name="SurveyorFK" Type="Guid" />
+          <Property Name="CalculatedVal" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SurveyorValuation" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="NewLTV" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ComparablesLink" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DesktopCaseStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="StatusName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbl_User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FullName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="UserPassword" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="UserType" Type="Guid" />
+          <Property Name="FailCount" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="LastLogin" Type="DateTime" Precision="3" />
+          <Property Name="MFAPIN" Type="Int32" />
+          <Property Name="FirmID" Type="Guid" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsExternal" Type="Boolean" />
+          <Property Name="ActiveStep" Type="Int32" />
+          <Property Name="ResetUID" Type="Guid" />
+          <Property Name="UserStatus" Type="Guid" />
+          <Property Name="BSMid" Type="Guid" />
+          <Property Name="IsTestUser" Type="Boolean" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="tbl_UserType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ELMAH_Error">
+          <Key>
+            <PropertyRef Name="ErrorId" />
+            <PropertyRef Name="Application" />
+            <PropertyRef Name="Host" />
+            <PropertyRef Name="Type" />
+            <PropertyRef Name="Source" />
+            <PropertyRef Name="Message" />
+            <PropertyRef Name="User" />
+            <PropertyRef Name="StatusCode" />
+            <PropertyRef Name="TimeUtc" />
+            <PropertyRef Name="Sequence" />
+            <PropertyRef Name="AllXml" />
+          </Key>
+          <Property Name="ErrorId" Type="Guid" Nullable="false" />
+          <Property Name="Application" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Host" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Source" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Message" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="User" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StatusCode" Type="Int32" Nullable="false" />
+          <Property Name="TimeUtc" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Sequence" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AllXml" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FilestreamFiles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="File" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="FileName" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="MDVEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DesktopCases" EntityType="Self.DesktopCases" />
+          <EntitySet Name="DesktopCaseStatus" EntityType="Self.DesktopCaseStatus" />
+          <EntitySet Name="tbl_User" EntityType="Self.tbl_User" />
+          <EntitySet Name="tbl_UserType" EntityType="Self.tbl_UserType" />
+          <EntitySet Name="ELMAH_Error" EntityType="Self.ELMAH_Error" />
+          <EntitySet Name="FilestreamFiles" EntityType="Self.FilestreamFiles" />
+          <FunctionImport Name="f_usp_PasswordResetRequest_email">
+            <Parameter Name="userEmail" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ELMAH_GetErrorsXml" ReturnType="Collection(String)">
+            <Parameter Name="Application" Mode="In" Type="String" />
+            <Parameter Name="PageIndex" Mode="In" Type="Int32" />
+            <Parameter Name="PageSize" Mode="In" Type="Int32" />
+            <Parameter Name="TotalCount" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ELMAH_GetErrorXml" ReturnType="Collection(String)">
+            <Parameter Name="Application" Mode="In" Type="String" />
+            <Parameter Name="ErrorId" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="ELMAH_LogError">
+            <Parameter Name="ErrorId" Mode="In" Type="Guid" />
+            <Parameter Name="Application" Mode="In" Type="String" />
+            <Parameter Name="Host" Mode="In" Type="String" />
+            <Parameter Name="Type" Mode="In" Type="String" />
+            <Parameter Name="Source" Mode="In" Type="String" />
+            <Parameter Name="Message" Mode="In" Type="String" />
+            <Parameter Name="User" Mode="In" Type="String" />
+            <Parameter Name="AllXml" Mode="In" Type="String" />
+            <Parameter Name="StatusCode" Mode="In" Type="Int32" />
+            <Parameter Name="TimeUtc" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Filestream_Insert">
+            <Parameter Name="Document" Mode="In" Type="Binary" />
+            <Parameter Name="filename" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_InsertUserByType" ReturnType="Collection(String)">
+            <Parameter Name="firstname" Mode="In" Type="String" />
+            <Parameter Name="lastname" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="usertype" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="usp_mfa_pin_email">
+            <Parameter Name="userid" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_net_Login_Get" ReturnType="Collection(MDVModel.usp_net_Login_Get_Result)">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="pwd" Mode="In" Type="String" />
+            <Parameter Name="usertype" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Password_Update" ReturnType="Collection(MDVModel.UspPasswordUpdate_Result)">
+            <Parameter Name="uid" Mode="In" Type="String" />
+            <Parameter Name="newpass" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspPasswordResetRequestEmail" ReturnType="Collection(MDVModel.UspPasswordresetRequestEmail_Result)">
+            <Parameter Name="userEmail" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UspPasswordUidCheck" ReturnType="Collection(MDVModel.UspPasswordUidCheck_Result)">
+            <Parameter Name="guid" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_SecureLogin_Get" ReturnType="Collection(MDVModel.usp_SecureLogin_Get_Result)">
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Pwd" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_SendEmailByTemplateId">
+            <Parameter Name="userid" Mode="In" Type="String" />
+            <Parameter Name="templateid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_wq_fail">
+            <Parameter Name="questref" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_wq_GetNext">
+            <Parameter Name="uid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_wq_success">
+            <Parameter Name="questref" Mode="In" Type="String" />
+            <Parameter Name="Address" Mode="In" Type="String" />
+            <Parameter Name="postcode" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_WQbyStatus_Get" ReturnType="Collection(MDVModel.usp_WQbyStatus_Get_Result)">
+            <Parameter Name="status" Mode="In" Type="Int32" />
+            <Parameter Name="surv" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="UspLogin" ReturnType="Collection(MDVModel.UspLogin_Result)">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="pwd" Mode="In" Type="String" />
+            <Parameter Name="usertype" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="UspCodeGen">
+            <Parameter Name="userid" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="usp_net_Login_Get_Result">
+          <Property Type="String" Name="Error" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="UserId" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="FullName" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="UserType" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="MFAPIN" Nullable="false" />
+          <Property Type="Int32" Name="ActiveStep" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="usp_SecureLogin_Get_Result">
+          <Property Type="String" Name="Error" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="Lastname" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="1" />
+        </ComplexType>
+        <ComplexType Name="usp_WQbyStatus_Get_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="CaseRef" Nullable="true" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Postcode" Nullable="true" MaxLength="15" />
+        </ComplexType>
+        <ComplexType Name="UspLogin_Result">
+          <Property Type="String" Name="Error" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="UserId" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="FullName" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="UserType" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="MFAPIN" Nullable="false" />
+          <Property Type="Int32" Name="ActiveStep" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="UspPasswordresetRequestEmail_Result" >
+          <Property Type="String" Name="Response" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="UspPasswordUpdate_Result" >
+          <Property Type="String" Name="Response" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="UspRAGMessage_Result" />
+        <ComplexType Name="UspPasswordUidCheck_Result" >
+          <Property Type="String" Name="Error" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MDVModelStoreContainer" CdmEntityContainer="MDVEntities">
+          <EntitySetMapping Name="DesktopCases">
+            <EntityTypeMapping TypeName="MDVModel.DesktopCases">
+              <MappingFragment StoreEntitySet="DesktopCases">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CaseRef" ColumnName="CaseRef" />
+                <ScalarProperty Name="PlatformRef" ColumnName="PlatformRef" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+                <ScalarProperty Name="EstimatedVal" ColumnName="EstimatedVal" />
+                <ScalarProperty Name="LoanAmount" ColumnName="LoanAmount" />
+                <ScalarProperty Name="OriginalLTV" ColumnName="OriginalLTV" />
+                <ScalarProperty Name="PropertyType" ColumnName="PropertyType" />
+                <ScalarProperty Name="PropertyStyle" ColumnName="PropertyStyle" />
+                <ScalarProperty Name="Beds" ColumnName="Beds" />
+                <ScalarProperty Name="Tenure" ColumnName="Tenure" />
+                <ScalarProperty Name="AppointmentDate" ColumnName="AppointmentDate" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="SurveyorFK" ColumnName="SurveyorFK" />
+                <ScalarProperty Name="CalculatedVal" ColumnName="CalculatedVal" />
+                <ScalarProperty Name="SurveyorValuation" ColumnName="SurveyorValuation" />
+                <ScalarProperty Name="NewLTV" ColumnName="NewLTV" />
+                <ScalarProperty Name="ComparablesLink" ColumnName="ComparablesLink" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DesktopCaseStatus">
+            <EntityTypeMapping TypeName="MDVModel.DesktopCaseStatus">
+              <MappingFragment StoreEntitySet="DesktopCaseStatus">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_User">
+            <EntityTypeMapping TypeName="MDVModel.tbl_User">
+              <MappingFragment StoreEntitySet="tbl_User">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="FailCount" ColumnName="FailCount" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+                <ScalarProperty Name="MFAPIN" ColumnName="MFAPIN" />
+                <ScalarProperty Name="FirmID" ColumnName="FirmID" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsExternal" ColumnName="IsExternal" />
+                <ScalarProperty Name="ActiveStep" ColumnName="ActiveStep" />
+                <ScalarProperty Name="ResetUID" ColumnName="ResetUID" />
+                <ScalarProperty Name="UserStatus" ColumnName="UserStatus" />
+                <ScalarProperty Name="BSMid" ColumnName="BSMid" />
+                <ScalarProperty Name="IsTestUser" ColumnName="IsTestUser" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_UserType">
+            <EntityTypeMapping TypeName="MDVModel.tbl_UserType">
+              <MappingFragment StoreEntitySet="tbl_UserType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ELMAH_Error">
+            <EntityTypeMapping TypeName="MDVModel.ELMAH_Error">
+              <MappingFragment StoreEntitySet="ELMAH_Error">
+                <ScalarProperty Name="ErrorId" ColumnName="ErrorId" />
+                <ScalarProperty Name="Application" ColumnName="Application" />
+                <ScalarProperty Name="Host" ColumnName="Host" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="User" ColumnName="User" />
+                <ScalarProperty Name="StatusCode" ColumnName="StatusCode" />
+                <ScalarProperty Name="TimeUtc" ColumnName="TimeUtc" />
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+                <ScalarProperty Name="AllXml" ColumnName="AllXml" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FilestreamFiles">
+            <EntityTypeMapping TypeName="MDVModel.FilestreamFiles">
+              <MappingFragment StoreEntitySet="FilestreamFiles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="File" ColumnName="File" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="f_usp_PasswordResetRequest_email" FunctionName="MDVModel.Store.f_usp_PasswordResetRequest_email" />
+          <FunctionImportMapping FunctionImportName="ELMAH_GetErrorsXml" FunctionName="MDVModel.Store.ELMAH_GetErrorsXml" />
+          <FunctionImportMapping FunctionImportName="ELMAH_GetErrorXml" FunctionName="MDVModel.Store.ELMAH_GetErrorXml" />
+          <FunctionImportMapping FunctionImportName="ELMAH_LogError" FunctionName="MDVModel.Store.ELMAH_LogError" />
+          <FunctionImportMapping FunctionImportName="usp_Filestream_Insert" FunctionName="MDVModel.Store.usp_Filestream_Insert" />
+          <FunctionImportMapping FunctionImportName="usp_InsertUserByType" FunctionName="MDVModel.Store.usp_InsertUserByType" />
+          <FunctionImportMapping FunctionImportName="usp_mfa_pin_email" FunctionName="MDVModel.Store.usp_mfa_pin_email" />
+          <FunctionImportMapping FunctionImportName="usp_net_Login_Get" FunctionName="MDVModel.Store.usp_net_Login_Get">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MDVModel.usp_net_Login_Get_Result">
+                <ScalarProperty Name="Error" ColumnName="Error" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="MFAPIN" ColumnName="MFAPIN" />
+                <ScalarProperty Name="ActiveStep" ColumnName="ActiveStep" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_Password_Update" FunctionName="MDVModel.Store.usp_Password_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MDVModel.UspPasswordUpdate_Result" />
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspPasswordResetRequestEmail" FunctionName="MDVModel.Store.usp_PasswordResetRequest_email" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MDVModel.UspPasswordresetRequestEmail_Result" />
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UspPasswordUidCheck" FunctionName="MDVModel.Store.usp_Passworduid_Check" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MDVModel.UspPasswordUidCheck_Result">
+                <ScalarProperty Name="Error" ColumnName="Error" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_SecureLogin_Get" FunctionName="MDVModel.Store.usp_SecureLogin_Get">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MDVModel.usp_SecureLogin_Get_Result">
+                <ScalarProperty Name="Error" ColumnName="Error" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_SendEmailByTemplateId" FunctionName="MDVModel.Store.usp_SendEmailByTemplateId" />
+          <FunctionImportMapping FunctionImportName="usp_wq_fail" FunctionName="MDVModel.Store.usp_wq_fail" />
+          <FunctionImportMapping FunctionImportName="usp_wq_GetNext" FunctionName="MDVModel.Store.usp_wq_GetNext" />
+          <FunctionImportMapping FunctionImportName="usp_wq_success" FunctionName="MDVModel.Store.usp_wq_success" />
+          <FunctionImportMapping FunctionImportName="usp_WQbyStatus_Get" FunctionName="MDVModel.Store.usp_WQbyStatus_Get">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MDVModel.usp_WQbyStatus_Get_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CaseRef" ColumnName="CaseRef" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UspLogin" FunctionName="MDVModel.Store.usp_net_Login_Get">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MDVModel.UspLogin_Result">
+                <ScalarProperty Name="Error" ColumnName="Error" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="MFAPIN" ColumnName="MFAPIN" />
+                <ScalarProperty Name="ActiveStep" ColumnName="ActiveStep" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UspCodeGen" FunctionName="MDVModel.Store.usp_mfa_pin_email" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
