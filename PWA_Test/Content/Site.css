@@ -1,4 +1,4 @@
-﻿﻿body {
+﻿body {
     background-image: url(images/icons/BGTimeline.png);
     background-repeat: no-repeat;
     background-size: 100vw;
@@ -179,13 +179,12 @@ a.link-icon {
         text-align: center;
     }
 
-        .table td:nth-child(6) {
-            display: none;
-        }
-
-    .table th:nth-child(6) {
+    .table td:nth-child(6) {
         display: none;
     }
+        .table th:nth-child(6) {
+            display: none;
+        }
 
     .table tr {
         background-color: #f1f1f1
@@ -196,9 +195,9 @@ a.link-icon {
             cursor: pointer
         }
 
-.tableNC tr:hover {
-    cursor: default
-}
+        .tableNC tr:hover {
+            cursor: default
+        }
 
 .desktop-table {
     width: 100%;
@@ -260,4 +259,3 @@ a {
         cursor: pointer;
         text-decoration: none;
     }
-
