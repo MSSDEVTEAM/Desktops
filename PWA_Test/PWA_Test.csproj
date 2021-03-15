@@ -303,8 +303,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Config\ConfigSettings.cs" />
-    <Compile Include="Controllers\CaseController.cs" />
-    <Compile Include="Controllers\ComparableController.cs" />
     <Compile Include="Controllers\DesktopCasesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OfflineController.cs" />
