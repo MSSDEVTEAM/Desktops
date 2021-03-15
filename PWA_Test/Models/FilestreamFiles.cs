@@ -10,9 +10,12 @@
 namespace PWA_Test.Models
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class UspPasswordUpdate_Result
+    public partial class FilestreamFiles
     {
-        public string Response { get; set; }
+        public System.Guid Id { get; set; }
+        public byte[] File { get; set; }
+        public string FileName { get; set; }
     }
 }

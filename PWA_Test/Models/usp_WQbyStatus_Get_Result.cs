@@ -11,8 +11,11 @@ namespace PWA_Test.Models
 {
     using System;
     
-    public partial class UspPasswordUpdate_Result
+    public partial class usp_WQbyStatus_Get_Result
     {
-        public string Response { get; set; }
+        public int Id { get; set; }
+        public Nullable<int> CaseRef { get; set; }
+        public string Address { get; set; }
+        public string Postcode { get; set; }
     }
 }

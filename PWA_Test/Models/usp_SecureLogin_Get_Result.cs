@@ -11,8 +11,12 @@ namespace PWA_Test.Models
 {
     using System;
     
-    public partial class UspPasswordUpdate_Result
+    public partial class usp_SecureLogin_Get_Result
     {
-        public string Response { get; set; }
+        public string Error { get; set; }
+        public int UserId { get; set; }
+        public string FirstName { get; set; }
+        public string Lastname { get; set; }
+        public string Email { get; set; }
     }
 }

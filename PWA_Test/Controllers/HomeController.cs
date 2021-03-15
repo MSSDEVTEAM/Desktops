@@ -31,18 +31,22 @@ namespace PWA_Test.Controllers
         {
             if (ModelState.IsValid)
             {
+              
 
                 string encryptedPassword = Security.EncryptPassword(objUser.UserPassword);
 
-                PWA_TestContext context  = new PWA_TestContext();
+               MDVEntities entities  = new MDVEntities();
 
 
                 if (Request.Form["Login"] != null)
                 {
                     // Get Guid for Operations user type
-                    var userType = context.tbl_UserType.Where(m => m.Type == "Operations").FirstOrDefault();
+                     usp_net_Login_Get_Result login_Result = new usp_net_Login_Get_Result();
 
-                    UspLogin_Result login_Result = context.UspLogin(objUser.UserName, encryptedPassword, userType.ID).FirstOrDefault();
+                    var userType = entities.tbl_UserType.Where(m => m.Type == "Surveyor").FirstOrDefault();
+
+                   // usp_net_Login_Get_Result 
+                        login_Result = entities.usp_net_Login_Get(objUser.UserName, encryptedPassword, userType.ID).FirstOrDefault();
 
                     if (login_Result.Error == string.Empty)
                     {
@@ -51,7 +55,7 @@ namespace PWA_Test.Controllers
                                                         { "id",login_Result.UserId }
                                                         };
 
-                        return View("VerifyCode");
+                      return View("VerifyCode");
                     }
                     else
                     {
@@ -65,7 +69,7 @@ namespace PWA_Test.Controllers
             return View(objUser);
         }
 
-        public void fillsessions(UspLogin_Result UserDetails)
+        public void fillsessions(usp_net_Login_Get_Result UserDetails)
             {
                 Session["UserName"] = UserDetails.FullName;
                 Session["UserId"] = UserDetails.UserId;
@@ -102,7 +106,7 @@ namespace PWA_Test.Controllers
                         var routeValues = new RouteValueDictionary {
                                                         { "id",Session["UserId"] }
                                                         };
-                        return RedirectToAction("Index", "CaseLanding", routeValues);
+                        return RedirectToAction("Index", "DesktopCases", routeValues);
                     }
                     else
                     {
@@ -118,10 +122,10 @@ namespace PWA_Test.Controllers
             {
                 try
                 {
-                    PWA_TestContext context = new PWA_TestContext();
-                   // PWA_TestContext entities = new NewBuildOperationsEntities();
+                    MDVEntities entities = new MDVEntities();
+                   // Desktop entities = new NewBuildOperationsEntities();
 
-                    context.UspCodeGen(Session["UserId"].ToString());
+                    entities.usp_mfa_pin_email(Session["UserId"].ToString());
 
                     ViewBag.Message = "New code sent";
                     ViewBag.ShowCodeGen = false;
@@ -155,11 +159,10 @@ namespace PWA_Test.Controllers
 
             if (Request.Form["SendPasswordResetLink"] != null)
             {
-                PWA_TestContext context = new PWA_TestContext();
+                MDVEntities entities = new MDVEntities();
 
-               // NewBuildOperationsEntities entities = new NewBuildOperationsEntities();
-
-                UspPasswordresetRequestEmail_Result result = context.UspPasswordresetRequestEmail(objUser.Email).FirstOrDefault();
+               
+                UspPasswordresetRequestEmail_Result result = entities.uspPasswordResetRequestEmail(objUser.Email).FirstOrDefault();
 
                 string response = result.Response;
 
@@ -199,9 +202,10 @@ namespace PWA_Test.Controllers
                 string encryptedpwd = Security.EncryptPassword(Request.Form["NewPassword"]);
                 try
                 {
-                    PWA_TestContext context = new PWA_TestContext();
+                    MDVEntities entities = new MDVEntities();
                    // NewBuildOperationsEntities entities = new NewBuildOperationsEntities();
-                    UspPasswordUpdate_Result pswdUpdateResult = context.UspPasswordUpdate(urluid, encryptedpwd).FirstOrDefault();
+                   
+                    UspPasswordUpdate_Result pswdUpdateResult = entities.usp_Password_Update(urluid, encryptedpwd).FirstOrDefault();
                     resp = pswdUpdateResult.Response;
                     if (resp == "success")
                     {
@@ -240,12 +244,12 @@ namespace PWA_Test.Controllers
 
             Session["urluid"] = urluid;
 
-            PWA_TestContext context = new PWA_TestContext();
+            MDVEntities entities = new MDVEntities();
 
-            // NewBuildOperationsEntities entities = new NewBuildOperationsEntities();
+
+            UspPasswordUidCheck_Result uidCheck_Result = entities.UspPasswordUidCheck(urluid).FirstOrDefault();
+
           
-
-            UspPasswordUidCheck_Result uidCheck_Result = context.UspPasswordUidCheck(urluid).FirstOrDefault();
 
             if (uidCheck_Result.Error != string.Empty)
             {

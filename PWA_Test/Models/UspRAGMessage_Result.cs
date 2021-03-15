@@ -11,8 +11,7 @@ namespace PWA_Test.Models
 {
     using System;
     
-    public partial class UspPasswordUpdate_Result
+    public partial class UspRAGMessage_Result
     {
-        public string Response { get; set; }
     }
 }
