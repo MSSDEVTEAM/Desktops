@@ -59,13 +59,13 @@ a.link-icon {
     line-height: 22px;
     border-radius: 15px;
     border: none;
-    margin-bottom: 10px;
+    margin: 0 auto;
     font-size: 16px;
+    margin-right: 10px;
     font-weight: 600;
     color: white;
     white-space: normal;
     float: left;
-    margin-right: 25px;
     padding: 10px 30px;
 }
 
@@ -89,6 +89,10 @@ a.link-icon {
         transform: translateY(-0.25em);
         background-color: #193d61;
         color: #48bbde;
+    }
+
+    .desktopbtn:focus, .casesbtn:focus {
+        outline: none;
     }
 
 .left-tables {
@@ -171,6 +175,10 @@ a.link-icon {
         .table tr:hover {
             background-color: #dedede;
             cursor: pointer
+        }
+
+        .tableNC tr:hover {
+            cursor: default
         }
 
 .desktop-table {
