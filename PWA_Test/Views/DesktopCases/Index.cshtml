@@ -25,71 +25,80 @@
                         @Html.DisplayNameFor(model => model.Postcode)
                     </th>
                     @*<th>
-                @Html.DisplayNameFor(model => model.EstimatedVal)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LoanAmount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OriginalLTV)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PropertyType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PropertyStyle)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Beds)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tenure)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AppointmentDate)
-            </th>*@
+                            @Html.DisplayNameFor(model => model.EstimatedVal)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.LoanAmount)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.OriginalLTV)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PropertyType)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PropertyStyle)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Beds)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Tenure)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.AppointmentDate)
+                        </th>*@
                     <th>
                         @Html.DisplayNameFor(model => model.StatusId)
                     </th>
                     @*<th>
-                @Html.DisplayNameFor(model => model.SurveyorFK)
-            </th>*@
+                            @Html.DisplayNameFor(model => model.SurveyorFK)
+                        </th>*@
                     <th></th>
                 </tr>
 
-                @foreach (var item in Model) {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CaseRef)
-                    </td>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CaseRef)
+                        </td>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PlatformRef)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Address)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Postcode)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.StatusId)
-                    </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PlatformRef)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Address)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Postcode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StatusId)
+                        </td>
 
 
-                    @*<td>
-                @Html.DisplayFor(modelItem => item.SurveyorFK)
-            </td>*@
-                    <td>
-                        @*@Html.ActionLink("Select", "Edit", new { id=item.Id }) |*@
-                        @Html.ActionLink("Details", "Details", new { id = item.Id }) @*|
-                @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
-                    </td>
-                </tr>
-}
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.SurveyorFK)
+                            </td>*@
+                        <td>
+                            @*@Html.ActionLink("Select", "Edit", new { id=item.Id }) |*@
+                            @Html.ActionLink("Details", "Details", new { id = item.Id }) @*|
+                                @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
+                        </td>
+                    </tr>
+                }
 
             </table>
         </div>
     </div>
 </div>
+@Scripts.Render("~/bundles/jquery")
+<script>
+    $(document).on('click', '.table tr', function () {
+        let link = $(this).children('td').children('a').attr('href');
+        location.href = link;
+
+    });
+</script>
 

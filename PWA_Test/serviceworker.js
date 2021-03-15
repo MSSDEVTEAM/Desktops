@@ -4,7 +4,15 @@
     // Update 'version' if you need to refresh the cache
     var version = 'v1.0::CacheFirstSafe';
     var offlineUrl = "Offline"; // <-- Offline/Index.cshtml
-    var urlsToCache = ['/', offlineUrl]; // <-- Add more URLs you would like to cache.
+    var urlsToCache = ['/', offlineUrl,
+        '/content/images/icons/icon-72x72.png',
+        '/content/images/icons/icon-128x128.png',
+        '/content/images/icons/icon-144x144.png',
+        '/content/images/icons/icon-152x152.png',
+        '/content/images/icons/icon-192x192.png',
+        '/content/images/icons/icon-384x384.png',
+        '/content/images/icons/icon-512x512.png',
+    ]; // <-- Add more URLs you would like to cache.
 
     // Store core files in a cache (including a page to display when offline)
     function updateStaticCache() {

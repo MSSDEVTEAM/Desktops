@@ -3,7 +3,7 @@
     ViewBag.Title = "Comparable Property Details";
 }
 
-<div>
+<div class="left-tables" style="width: 50%;">
     <h4>Comparable Property Details</h4>
     <hr />
 
@@ -11,7 +11,11 @@
         @Html.Partial("_AddressPartial", (string)@ViewBag.Address)
     </div>
 
-    <dl class="dl-horizontal">
+    <dl class="dl-horizontal" style="text-align:center;">
+        <dd>
+            <img style="width: 60%; text-align: center" src=@Html.DisplayFor(model => model.image) alt="Property image" />
+        </dd>
+        <br />
         <dt>
             @Html.DisplayNameFor(model => model.addressLine)
         </dt>
@@ -27,15 +31,6 @@
         <dd>
             @Html.DisplayFor(model => model.postcode)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.image)
-        </dt>
-
-        <dd>
-            <img src=@Html.DisplayFor(model => model.image) alt="Property image" />
-        </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.compScore)
         </dt>
@@ -111,5 +106,5 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Back to the Comparables List", "Index")
+    @Html.ActionLink("Back to the Comparables List", "Index", new { id = Convert.ToInt32(ViewData["Id"]) })
 </p>

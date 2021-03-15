@@ -2,15 +2,14 @@
 @{
     ViewBag.Title = "Comparables List";
 }
-<div>
-    <h4>Comparables List</h4>
-    <hr />
+<div class="left-tables" style="text-align:left">
+    <h4 style="text-align:center">Comparables List</h4>
 
     <div class="address-font text-center">
         @Html.Partial("_AddressPartial", (string)@ViewBag.Address)
     </div>
 
-    <dl class="dl-horizontal">
+    <dl style="text-align:center" class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.subjectAddress)
         </dt>
@@ -25,12 +24,27 @@
 
     @foreach (var item in Model)
     {
-        <dl class="dl-horizontal">
+        <dl style="margin-left: 165px" class="dl-horizontal">
             <dt>Rank @item.rank property</dt>
-            <dd>
+            <dd style="align-content: center">
                 @Html.ActionLink(" ", "Details", new { rank = item.rank }, new { @class = "link-icon" })
             </dd>
         </dl>
     }
 
+    <p style="text-align:center">
+        @Html.ActionLink("Close", "", "", new { onclick = "window.close()" })
+    </p>
 </div>
+
+@Scripts.Render("~/bundles/jquery")
+<script>
+    $(document).ready(function () {
+
+    })
+    $(document).on('click', '.table tr', function () {
+        let link = $(this).children('td').children('a').attr('href');
+        location.href = link;
+
+    });
+</script>

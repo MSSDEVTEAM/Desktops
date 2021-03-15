@@ -7,7 +7,11 @@
 
 
 <div class="left-tables">
-    <div class="table">
+    <p>
+        <a style="margin-top:-50px" class="casesbtn" href="/DesktopCases">Back to list</a>
+        @*  @Html.ActionLink("Valuation", "Edit", new { id = Model.Id }) |*@
+    </p>
+    <div class="table tableNC">
         <div class="bar1">Desktop Case<span class="minustable glyphicon glyphicon-minus" style="color: white; font-size: 14px; float: right; margin-right: 10px; margin-top: 3px;"></span></div>
         <div class="Details slide">
 
@@ -65,18 +69,16 @@
 
 
 
-            <a href=@Html.DisplayFor(model => model.ComparablesLink) alt="Comparable properties" class="casesbtn" target="_blank">Go to Right Move</a>
-    <br />
-    <br />
+    <a href=@Html.DisplayFor(model => model.ComparablesLink) alt="Comparable properties" class="casesbtn" target="_blank">Go to Right Move</a>
 
-            <form action="@Url.Action("Index", "Comparable", new { id = Model.Id })" method="POST" target="_blank">
-                <input class="casesbtn" type="submit" value="Retrieve Comparables" />
-            </form>
-    <p>
-        @*  @Html.ActionLink("Valuation", "Edit", new { id = Model.Id }) |*@
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+
+    <form action="@Url.Action("Index", "Comparable", new { id = Model.Id })" method="POST" target="_blank">
+        <input class="casesbtn" type="submit" value="Retrieve Comparables" />
+    </form>
+
+    <br />
+    <br />
 </div>
-    
+
 
 
