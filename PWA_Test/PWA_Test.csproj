@@ -279,6 +279,7 @@
     <Compile Include="Models\Comparable.cs" />
     <Compile Include="Models\DesktopCases.cs" />
     <Compile Include="Models\DesktopCaseStatus.cs" />
+    <Compile Include="Models\MapDetails.cs" />
     <Compile Include="Models\PWA_TestContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

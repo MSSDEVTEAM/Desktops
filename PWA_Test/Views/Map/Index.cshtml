@@ -1,4 +1,5 @@
-﻿@{
+﻿@model PWA_Test.Models.MapDetails
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -28,7 +29,7 @@
 
                 // These are options that set initial zoom level, where the map is centered globally to start, and the type of map to show
                 var mapOptions = {
-                    zoom: 17,
+                    zoom: 14,
                     center: Liverpool,
                     mapTypeId: google.maps.MapTypeId.G_NORMAL_MAP
                 };
@@ -37,7 +38,7 @@
                 var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
 
                 // This shows adding a simple pin "marker" - this happens to be the Tate Gallery in Liverpool!
-                var myLatlng = new google.maps.LatLng(53.40091, -2.994464);
+                var myLatlng = new google.maps.LatLng(@(Model.longtitude), @(Model.latitiude));
 
                 var marker = new google.maps.Marker({
                     position: myLatlng,
