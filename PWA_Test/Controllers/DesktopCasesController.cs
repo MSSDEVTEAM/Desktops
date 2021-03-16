@@ -11,7 +11,7 @@ namespace PWA_Test.Controllers
 {
     public class DesktopCasesController : Controller
     {
-        private MDVEntities db = new MDVEntities();
+        private PWA_TestContext db = new PWA_TestContext();
 
         // GET: DesktopCases
         public ActionResult Index()
