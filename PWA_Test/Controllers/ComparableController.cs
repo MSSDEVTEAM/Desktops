@@ -40,7 +40,7 @@ namespace PWA_Test.Controllers
                 {
                     var subjectAddress = (string)xml.Descendants("subject-property").ElementAt(0).Element("address").Element("address-line");
                     var subjectPostcode = (string)xml.Descendants("subject-property").ElementAt(0).Element("address").Element("postcode");
-                    ViewBag.Address = subjectAddress + subjectPostcode;
+                    ViewBag.Address = subjectAddress + ',' + subjectPostcode;
                     TempData["address"] = ViewBag.Address;
 
                     IEnumerable<XElement> comparables = xml
