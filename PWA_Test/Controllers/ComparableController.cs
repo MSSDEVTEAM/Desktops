@@ -40,8 +40,15 @@ namespace PWA_Test.Controllers
                 {
                     var subjectAddress = (string)xml.Descendants("subject-property").ElementAt(0).Element("address").Element("address-line");
                     var subjectPostcode = (string)xml.Descendants("subject-property").ElementAt(0).Element("address").Element("postcode");
+                    // For the partial view header
                     ViewBag.Address = subjectAddress + subjectPostcode;
+
+                    // For passing to the details action
                     TempData["address"] = ViewBag.Address;
+
+                    // For the map controller to pass in the address to google maps
+                    @ViewData["subjectAddress"] = subjectAddress;
+                    @ViewData["subjectPostcode"] = subjectPostcode;
 
                     IEnumerable<XElement> comparables = xml
                         .Descendants("comparables")
@@ -79,6 +86,9 @@ namespace PWA_Test.Controllers
             {
                 ViewData["Id"] = TempData["Id"];
                 ViewBag.Address = TempData["address"];
+
+                // For the google map 
+                TempData["subjectAddress"] = TempData["address"];
 
                 IEnumerable<XElement> comparables = (IEnumerable<XElement>)TempData["comparables"];
                 var parentNode = "comparable-property";

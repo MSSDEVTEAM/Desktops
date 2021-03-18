@@ -4,9 +4,12 @@
 }
 
 <div class="left-tables" style="width: 50%;">
-    <p>
+    @*<p>
         <a style="margin-top:-100px" class="casesbtn" href="~/Map" target="_blank">Map</a>
-    </p>
+    </p>*@
+    <form style="margin-top:-80px" action="@Url.Action("Index", "Map", new { address =  Model.addressLine, postcode = Model.postcode })" method="POST" target="_blank">
+        <input class="casesbtn" type="submit" value="Map" />
+    </form>
 
     <h4>Comparable Property Details</h4>
     <hr />
