@@ -1,0 +1,60 @@
+﻿@model PWA_Test.Models.tbl_User
+
+@{
+    ViewBag.Title = "Verify Code";
+}
+
+@using (Html.BeginForm("VerifyCode", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="center2">
+        <div class="mfa">
+            <p style="color: white;">Please enter the code we have sent to your email address.</p>
+            @Html.TextBoxFor(a => a.MFAPIN, new { @class = "textboxlogin", @placeholder = "Enter code", @name = "mfaPin" })
+
+            @Html.ValidationSummary(true, null, new { @class = "validationError" })
+            <button type="submit" class="loginButton" name="VerifyCode">Verify</button>
+            <br />
+
+            @Html.ActionLink("Cancel", "Login", null, new { @class = "goback", @style = "text-align: center; margin-left:4%;" })
+
+        </div>
+
+        @if (ViewBag.ShowCodeGen != null)
+        {
+            if (ViewBag.ShowCodeGen)
+            {
+                <input type="submit" value="Send me a new code" name="NewCode" class="loginButton" />
+            }
+            <label class="validationError">  @ViewBag.Message</label>
+        }
+
+        @if (ViewBag.CodeGenSuccess != null)
+        {
+            if (ViewBag.CodeGenSuccess)
+            {
+
+                <p class="validationError">We have sent a new code to your email, you will be able to request a new one in 2 minutes if you haven't received it by then, but please allow time for it to reach your inbox.</p>
+            }
+        }
+    </div>
+}
+
+
+@section scripts{
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/cssjqryUi")
+
+
+  <script>
+        $(document).ready(function () {
+
+            $("body").fadeIn(2000, function () {
+
+            });
+        });</script>
+}

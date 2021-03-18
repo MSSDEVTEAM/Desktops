@@ -1,0 +1,73 @@
+﻿@model PWA_Test.Models.tbl_User
+
+@{
+    Layout = "~/Views/Shared/_LayoutForLogin.cshtml";
+}
+
+
+@using (Html.BeginForm("Login", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="center2">
+
+        <div class="login">
+            @Html.TextBoxFor(a => a.UserName, new { @class = "textboxlogin", @placeholder = "User name", @id = "email" })
+            @Html.ValidationMessageFor(a => a.UserName, null, new { @class = "validationError" })
+            @Html.PasswordFor(a => a.UserPassword, new { @class = "textboxlogin", @placeholder = "Password", @id = "password" })
+            <span toggle="password" onclick="myFunction()" class="glyphicon glyphicon-eye-open field-icon toggle-password"></span>
+            <span class="glyphicon glyphicon-text-size field-icon2"></span>
+
+            @Html.ValidationMessageFor(a => a.UserPassword, null, new { @class = "validationError" })
+
+            <button type="submit" class="loginButton" name="Login">Login</button>
+            @Html.ActionLink("Forgotten Password", "RecoverPassword", null, new { @class = "forgotpwd", @style = "text-align: center; " })
+            @Html.ValidationSummary(true, null, new { @class = "validationError" })
+
+
+        </div>
+    </div>
+
+}
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("body").fadeIn(2000, function () {
+
+            });
+
+            var input = document.getElementById("password");
+            input.addEventListener("keyup", function (event) {
+
+                if (event.getModifierState("CapsLock")) {
+                    $('.field-icon2').css('display', 'block')
+                } else {
+                    $('.field-icon2').css('display', 'none')
+                }
+            });
+        });
+
+        function myFunction() {
+            var x = document.getElementById("password");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+        $(document).on('click', '.glyphicon-eye-open', function () {
+            $(this).removeClass('glyphicon-eye-open');
+            $(this).addClass('glyphicon-eye-close');
+        })
+
+        $(document).on('click', '.glyphicon-eye-close', function () {
+            $(this).removeClass('glyphicon-eye-close');
+            $(this).addClass('glyphicon-eye-open');
+        })
+
+
+    </script>
+}
+
