@@ -9,5 +9,11 @@ namespace PWA_Test.Models
 
         [DisplayName("Latitiude")]
         public double latitiude { get; set; }
+
+        [DisplayName("Address")]
+        public string address { get; set; }
+
+        [DisplayName("Subject Property Address")]
+        public string subjectAddress { get; set; }
     }
 }

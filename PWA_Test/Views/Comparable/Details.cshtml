@@ -5,11 +5,15 @@
 
 
 <div class="overall">
-<p>
+    @*<p>
         <a style="margin-top:-100px" class="casesbtn" href="~/Map" target="_blank">Map</a>
-    </p>
+    </p>*@
+    <form style="margin-top:-100px" action="@Url.Action("Index", "Map", new { address =  Model.addressLine, postcode = Model.postcode })" method="POST" target="_blank">
+        <input class="casesbtn" type="submit" value="Map" />
+    </form>
+
     <div class="bar1">Comparable Property Details - @ViewBag.Address<span class="minustable glyphicon glyphicon-minus" style="color: white; font-size: 14px; float: right; margin-right: 10px; margin-top: 3px;"></span></div>
-    
+
     <div class="column1">
         <div class="size backtolist">
             <p class="title2" style="font-size: 28px;">Address</p>

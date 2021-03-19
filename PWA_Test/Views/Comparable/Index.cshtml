@@ -3,28 +3,18 @@
     ViewBag.Title = "Comparables List";
 }
 <div class="left-tables" style="text-align:left">
-    <p>
+    @*<p>
         <a style="margin-top:-100px" class="casesbtn" href="~/Map" target="_blank">Map</a>
-    </p>
+    </p>*@
+    <form style="margin-top:-80px" action="@Url.Action("Index", "Map", new { address =  @ViewData["subjectAddress"], postcode = @ViewData["subjectPostcode"] })" method="POST" target="_blank">
+        <input class="casesbtn" type="submit" value="Map" />
+    </form>
 
     <h4 style="text-align:center">Comparables List</h4>
 
     <div class="address-font text-center">
         @Html.Partial("_AddressPartial", (string)@ViewBag.Address)
     </div>
-
-    <dl style="text-align:center" class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.subjectAddress)
-        </dt>
-
-        <dd>
-            @ViewData["subjectAddress"]
-        </dd>
-        <dd>
-            @ViewData["subjectPostcode"]
-        </dd>
-    </dl>
 
     @foreach (var item in Model)
     {
