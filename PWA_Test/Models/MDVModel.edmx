@@ -109,9 +109,6 @@ warning 6002: The table/view 'MDV.dbo.FilestreamFiles' does not have a primary k
           <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Type" Type="varchar" MaxLength="255" />
         </EntityType>
-        <Function Name="f_usp_PasswordResetRequest_email" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_usp_PasswordResetRequest_email">
-          <Parameter Name="userEmail" Type="varchar" Mode="In" />
-        </Function>
         <Function Name="ELMAH_GetErrorsXml" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Application" Type="nvarchar" Mode="In" />
           <Parameter Name="PageIndex" Type="int" Mode="In" />
@@ -159,7 +156,7 @@ warning 6002: The table/view 'MDV.dbo.FilestreamFiles' does not have a primary k
           <Parameter Name="uid" Type="varchar" Mode="In" />
           <Parameter Name="newpass" Type="varchar" Mode="In" />
         </Function>
-        <Function Name="usp_PasswordResetRequest_email" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="usp_PasswordResetRequest_Email" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userEmail" Type="varchar" Mode="In" />
         </Function>
         <Function Name="usp_Passworduid_Check" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -328,9 +325,6 @@ warning 6002: The table/view 'MDV.dbo.FilestreamFiles' does not have a primary k
           <EntitySet Name="tbl_UserType" EntityType="Self.tbl_UserType" />
           <EntitySet Name="ELMAH_Error" EntityType="Self.ELMAH_Error" />
           <EntitySet Name="FilestreamFiles" EntityType="Self.FilestreamFiles" />
-          <FunctionImport Name="f_usp_PasswordResetRequest_email">
-            <Parameter Name="userEmail" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="ELMAH_GetErrorsXml" ReturnType="Collection(String)">
             <Parameter Name="Application" Mode="In" Type="String" />
             <Parameter Name="PageIndex" Mode="In" Type="Int32" />
@@ -371,14 +365,14 @@ warning 6002: The table/view 'MDV.dbo.FilestreamFiles' does not have a primary k
             <Parameter Name="pwd" Mode="In" Type="String" />
             <Parameter Name="usertype" Mode="In" Type="Guid" />
           </FunctionImport>
-          <FunctionImport Name="usp_Password_Update" ReturnType="Collection(MDVModel.UspPasswordUpdate_Result)">
+          <FunctionImport Name="usp_Password_Update" ReturnType="Collection(String)">
             <Parameter Name="uid" Mode="In" Type="String" />
             <Parameter Name="newpass" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="uspPasswordResetRequestEmail" ReturnType="Collection(MDVModel.UspPasswordresetRequestEmail_Result)">
+          <FunctionImport Name="usp_PasswordResetRequest_Email">
             <Parameter Name="userEmail" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="UspPasswordUidCheck" ReturnType="Collection(MDVModel.UspPasswordUidCheck_Result)">
+          <FunctionImport Name="usp_Passworduid_Check" ReturnType="Collection(String)">
             <Parameter Name="guid" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="usp_SecureLogin_Get" ReturnType="Collection(MDVModel.usp_SecureLogin_Get_Result)">
@@ -404,13 +398,23 @@ warning 6002: The table/view 'MDV.dbo.FilestreamFiles' does not have a primary k
             <Parameter Name="status" Mode="In" Type="Int32" />
             <Parameter Name="surv" Mode="In" Type="Guid" />
           </FunctionImport>
+          <FunctionImport Name="UspCodeGen">
+            <Parameter Name="userid" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="UspLogin" ReturnType="Collection(MDVModel.UspLogin_Result)">
             <Parameter Name="username" Mode="In" Type="String" />
             <Parameter Name="pwd" Mode="In" Type="String" />
             <Parameter Name="usertype" Mode="In" Type="Guid" />
           </FunctionImport>
-          <FunctionImport Name="UspCodeGen">
-            <Parameter Name="userid" Mode="In" Type="String" />
+          <FunctionImport Name="UspPasswordresetRequestEmail" ReturnType="Collection(MDVModel.UspPasswordresetRequestEmail_Result)">
+            <Parameter Name="userEmail" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UspPasswordUidCheck" ReturnType="Collection(MDVModel.UspPasswordUidCheck_Result)">
+            <Parameter Name="guid" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UspPasswordUpdate" ReturnType="Collection(MDVModel.UspPasswordUpdate_Result)">
+            <Parameter Name="uid" Mode="In" Type="String" />
+            <Parameter Name="newpass" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_net_Login_Get_Result">
@@ -434,6 +438,7 @@ warning 6002: The table/view 'MDV.dbo.FilestreamFiles' does not have a primary k
           <Property Type="Int32" Name="CaseRef" Nullable="true" />
           <Property Type="String" Name="Address" Nullable="true" MaxLength="200" />
           <Property Type="String" Name="Postcode" Nullable="true" MaxLength="15" />
+          <Property Type="Int32" Name="Statusid" Nullable="true" />
         </ComplexType>
         <ComplexType Name="UspLogin_Result">
           <Property Type="String" Name="Error" Nullable="true" MaxLength="200" />
@@ -444,15 +449,14 @@ warning 6002: The table/view 'MDV.dbo.FilestreamFiles' does not have a primary k
           <Property Type="Int32" Name="MFAPIN" Nullable="false" />
           <Property Type="Int32" Name="ActiveStep" Nullable="false" />
         </ComplexType>
-        <ComplexType Name="UspPasswordresetRequestEmail_Result" >
-          <Property Type="String" Name="Response" Nullable="false" />
+        <ComplexType Name="UspPasswordUidCheck_Result">
+          <Property Type="String" Name="Error" Nullable="false" MaxLength="12" />
         </ComplexType>
         <ComplexType Name="UspPasswordUpdate_Result" >
           <Property Type="String" Name="Response" Nullable="false" />
         </ComplexType>
-        <ComplexType Name="UspRAGMessage_Result" />
-        <ComplexType Name="UspPasswordUidCheck_Result" >
-          <Property Type="String" Name="Error" Nullable="false" />
+        <ComplexType Name="UspPasswordresetRequestEmail_Result" >
+          <Property Type="String" Name="Response" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -556,7 +560,6 @@ warning 6002: The table/view 'MDV.dbo.FilestreamFiles' does not have a primary k
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="f_usp_PasswordResetRequest_email" FunctionName="MDVModel.Store.f_usp_PasswordResetRequest_email" />
           <FunctionImportMapping FunctionImportName="ELMAH_GetErrorsXml" FunctionName="MDVModel.Store.ELMAH_GetErrorsXml" />
           <FunctionImportMapping FunctionImportName="ELMAH_GetErrorXml" FunctionName="MDVModel.Store.ELMAH_GetErrorXml" />
           <FunctionImportMapping FunctionImportName="ELMAH_LogError" FunctionName="MDVModel.Store.ELMAH_LogError" />
@@ -576,23 +579,9 @@ warning 6002: The table/view 'MDV.dbo.FilestreamFiles' does not have a primary k
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="usp_Password_Update" FunctionName="MDVModel.Store.usp_Password_Update" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="MDVModel.UspPasswordUpdate_Result" />
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="uspPasswordResetRequestEmail" FunctionName="MDVModel.Store.usp_PasswordResetRequest_email" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="MDVModel.UspPasswordresetRequestEmail_Result" />
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UspPasswordUidCheck" FunctionName="MDVModel.Store.usp_Passworduid_Check" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="MDVModel.UspPasswordUidCheck_Result">
-                <ScalarProperty Name="Error" ColumnName="Error" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_Password_Update" FunctionName="MDVModel.Store.usp_Password_Update" />
+          <FunctionImportMapping FunctionImportName="usp_PasswordResetRequest_Email" FunctionName="MDVModel.Store.usp_PasswordResetRequest_Email" />
+          <FunctionImportMapping FunctionImportName="usp_Passworduid_Check" FunctionName="MDVModel.Store.usp_Passworduid_Check" />
           <FunctionImportMapping FunctionImportName="usp_SecureLogin_Get" FunctionName="MDVModel.Store.usp_SecureLogin_Get">
             <ResultMapping>
               <ComplexTypeMapping TypeName="MDVModel.usp_SecureLogin_Get_Result">
@@ -615,9 +604,11 @@ warning 6002: The table/view 'MDV.dbo.FilestreamFiles' does not have a primary k
                 <ScalarProperty Name="CaseRef" ColumnName="CaseRef" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+                <ScalarProperty Name="Statusid" ColumnName="Statusid" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UspCodeGen" FunctionName="MDVModel.Store.usp_mfa_pin_email" />
           <FunctionImportMapping FunctionImportName="UspLogin" FunctionName="MDVModel.Store.usp_net_Login_Get">
             <ResultMapping>
               <ComplexTypeMapping TypeName="MDVModel.UspLogin_Result">
@@ -631,7 +622,23 @@ warning 6002: The table/view 'MDV.dbo.FilestreamFiles' does not have a primary k
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UspCodeGen" FunctionName="MDVModel.Store.usp_mfa_pin_email" />
+          <FunctionImportMapping FunctionImportName="UspPasswordresetRequestEmail" FunctionName="MDVModel.Store.usp_PasswordResetRequest_Email" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MDVModel.UspPasswordresetRequestEmail_Result" />
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UspPasswordUidCheck" FunctionName="MDVModel.Store.usp_Passworduid_Check">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MDVModel.UspPasswordUidCheck_Result">
+                <ScalarProperty Name="Error" ColumnName="Error" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UspPasswordUpdate" FunctionName="MDVModel.Store.usp_Password_Update">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MDVModel.UspPasswordUpdate_Result" />
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

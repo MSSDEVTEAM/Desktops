@@ -17,5 +17,6 @@ namespace PWA_Test.Models
         public Nullable<int> CaseRef { get; set; }
         public string Address { get; set; }
         public string Postcode { get; set; }
+        public Nullable<int> Statusid { get; set; }
     }
 }

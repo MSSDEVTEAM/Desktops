@@ -6,8 +6,12 @@ namespace PWA_Test.Controllers
     {
         public ActionResult Index()
         {
+            RedirectToAction("Index", "Login");
             return View();
         }
+
+
+     
 
         public ActionResult About()
         {

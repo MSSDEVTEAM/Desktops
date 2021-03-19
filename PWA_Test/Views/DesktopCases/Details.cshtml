@@ -8,12 +8,14 @@
     <p>
         <a style="margin-top:-50px" class="casesbtn" href="~/DesktopCases">Back to list</a>
         @*  @Html.ActionLink("Valuation", "Edit", new { id = Model.Id }) |*@
-        @*<a style="margin-top:-100px" class="casesbtn" href="~/Map" target="_blank">Map</a>*@
+        <a style="margin-top:-100px" class="casesbtn" href="~/Map" target="_blank">Map</a>
+     
+
     </p>
 
-    <form style="margin-top:-80px" action="@Url.Action("Index", "Map", new { address = Model.Address, postcode = Model.Postcode })" method="POST" target="_blank">
+    @*<form style="margin-top:-80px" action="@Url.Action("Index", "Map", new { address = Model.Address, postcode = Model.Postcode })" method="POST" target="_blank">
         <input class="casesbtn" type="submit" value="Map" />
-    </form>
+    </form>*@
 
     <div class="table tableNC">
         <div class="bar1">Desktop Case<span class="minustable glyphicon glyphicon-minus" style="color: white; font-size: 14px; float: right; margin-right: 10px; margin-top: 3px;"></span></div>
@@ -75,6 +77,15 @@
         <input class="casesbtn" type="submit" value="Retrieve Comparables" />
     </form>
 
+    <form action="@Url.Action("Edit", "Home", new { id = Model.Id })" method="POST" target="_blank">
+        <input class="casesbtn" type="button" value="Escalate" />
+    </form>
+
+    @*<form action="@Url.Action("Valuation", "DesktopCases", new { id = Model.Id })">
+        <input class="casesbtn" type="submit" value="Valuation" />
+    </form>*@
+
+  
     <br />
     <br />
 </div>
