@@ -347,6 +347,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\icons\BGTimeline.png" />
     <Content Include="Content\images\icons\house-icon-32x33.png" />
     <Content Include="Content\images\icons\house-icon.png" />
     <Content Include="Content\images\icons\icon-128x128.png" />
@@ -356,6 +357,7 @@
     <Content Include="Content\images\icons\icon-384x384.png" />
     <Content Include="Content\images\icons\icon-512x512.png" />
     <Content Include="Content\images\icons\icon-72x72.png" />
+    <Content Include="Content\images\icons\icon-96x96.png" />
     <Content Include="Content\Styles.css" />
     <Content Include="Error.htm" />
     <Content Include="favicon.ico" />
