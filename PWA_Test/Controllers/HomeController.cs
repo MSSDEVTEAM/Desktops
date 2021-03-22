@@ -1,6 +1,5 @@
 ﻿using System.Web.Mvc;
 
-
 namespace PWA_Test.Controllers
 {
     public class HomeController : Controller
@@ -11,7 +10,8 @@ namespace PWA_Test.Controllers
             return View();
         }
 
-    
+
+     
 
         public ActionResult About()
         {
