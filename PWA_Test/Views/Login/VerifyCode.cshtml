@@ -4,6 +4,7 @@
     ViewBag.Title = "Verify Code";
 }
 
+
 @using (Html.BeginForm("VerifyCode", "Login", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
