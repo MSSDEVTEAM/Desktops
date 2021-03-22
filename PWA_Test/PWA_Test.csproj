@@ -506,11 +506,19 @@
     <Content Include="Views\DesktopCases\Valuation.cshtml" />
     <Content Include="Views\DesktopCases\Index.cshtml" />
     <Content Include="Views\Comparable\CompsIncomplete.cshtml" />
+    <Content Include="Views\Login\Index.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Login\RecoverPassword.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Login\ResetPassword.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Login\VerifyCode.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Views\Map\Index.cshtml" />
-    <Content Include="Views\Login\Index.cshtml" />
-    <Content Include="Views\Login\RecoverPassword.cshtml" />
-    <Content Include="Views\Login\ResetPassword.cshtml" />
-    <Content Include="Views\Login\VerifyCode.cshtml" />
     <Content Include="Views\Case\Index.cshtml" />
     <None Include="Views\Offline\Index.cshtml" />
     <Content Include="manifest.json" />
@@ -532,6 +540,7 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_AddressPartial.cshtml" />
+    <Content Include="Views\Shared\_LayoutForLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

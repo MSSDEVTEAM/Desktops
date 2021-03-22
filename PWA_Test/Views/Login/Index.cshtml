@@ -4,11 +4,9 @@
     Layout = "~/Views/Shared/_LayoutForLogin.cshtml";
 }
 
-
 @using (Html.BeginForm("Index", "Login", FormMethod.Get))
 {
     @Html.AntiForgeryToken()
-
  
     <div class="center2">
 
